@@ -1,0 +1,50 @@
+/home/jsj3921/.conda/envs/mamba/lib/python3.8/site-packages/pulp/apis/gurobi_api.py:357: UserWarning: GUROBI error: 
+ERROR 10009: No Gurobi license found (user jsj3921, host qnode0129, hostid efb6a16f, sockets 2)
+
+.
+  warnings.warn("GUROBI error: {}.".format(out))
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Sun Apr 10 21:34:08 2022]
+rule hclust_genus:
+    input: results/allDatasets/metaphlan/merged_abundance_table.genus.allDatasets.txt
+    output: results/allDatasets/metaphlan/abundance_heatmap_genus.allDatasets.png
+    jobid: 0
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=02:00:00
+
+
+        hclust2.py -i results/allDatasets/metaphlan/merged_abundance_table.genus.allDatasets.txt -o results/allDatasets/metaphlan/abundance_heatmap_genus.allDatasets.png --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 -l --flabel_size 10 --slabel_size 10 --max_flabel_len 100 --max_slabel_len 100 --minv 0.1 --dpi 300
+        
+Activating conda environment: .snakemake/conda/61c80d1c45fc99516c407e99048d3ee5
+Traceback (most recent call last):
+  File "/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/.snakemake/conda/61c80d1c45fc99516c407e99048d3ee5/bin/hclust2.py", line 825, in <module>
+    hclust2_main()
+  File "/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/.snakemake/conda/61c80d1c45fc99516c407e99048d3ee5/bin/hclust2.py", line 803, in hclust2_main
+    cl.shcluster()
+  File "/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/.snakemake/conda/61c80d1c45fc99516c407e99048d3ee5/bin/hclust2.py", line 380, in shcluster
+    self.shclusters = sph.linkage(self.s_dm, method=self.args.slinkage)
+  File "/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/.snakemake/conda/61c80d1c45fc99516c407e99048d3ee5/lib/python2.7/site-packages/scipy/cluster/hierarchy.py", line 1112, in linkage
+    n = int(distance.num_obs_y(y))
+  File "/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/.snakemake/conda/61c80d1c45fc99516c407e99048d3ee5/lib/python2.7/site-packages/scipy/spatial/distance.py", line 2384, in num_obs_y
+    raise ValueError("The number of observations cannot be determined on "
+ValueError: The number of observations cannot be determined on an empty distance matrix.
+[Sun Apr 10 21:34:09 2022]
+Error in rule hclust_genus:
+    jobid: 0
+    output: results/allDatasets/metaphlan/abundance_heatmap_genus.allDatasets.png
+    conda-env: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/.snakemake/conda/61c80d1c45fc99516c407e99048d3ee5
+    shell:
+        
+        hclust2.py -i results/allDatasets/metaphlan/merged_abundance_table.genus.allDatasets.txt -o results/allDatasets/metaphlan/abundance_heatmap_genus.allDatasets.png --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 -l --flabel_size 10 --slabel_size 10 --max_flabel_len 100 --max_slabel_len 100 --minv 0.1 --dpi 300
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message

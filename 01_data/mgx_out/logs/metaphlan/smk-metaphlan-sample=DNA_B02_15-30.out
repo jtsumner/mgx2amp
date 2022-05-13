@@ -1,0 +1,44 @@
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 20
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Mon May  9 21:56:03 2022]
+rule metaphlan:
+    input: resources/metaphlan_db, results/bwa_out/DNA_B02_15/DNA_B02_15.fastp_bwa.r1.fastq, results/bwa_out/DNA_B02_15/DNA_B02_15.fastp_bwa.r2.fastq
+    output: results/metaphlan_out/DNA_B02_15/DNA_B02_15.metaphlan_profile.txt, results/metaphlan_out/DNA_B02_15/DNA_B02_15.bowtie2.bz2
+    jobid: 0
+    wildcards: sample=DNA_B02_15
+    threads: 20
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=10g, time=04:00:00
+
+
+        metaphlan results/bwa_out/DNA_B02_15/DNA_B02_15.fastp_bwa.r1.fastq,results/bwa_out/DNA_B02_15/DNA_B02_15.fastp_bwa.r2.fastq         --bowtie2out results/metaphlan_out/DNA_B02_15/DNA_B02_15.bowtie2.bz2         --index mpa_v30_CHOCOPhlAn_201901         --bowtie2db resources/metaphlan_db         --nproc 20         --input_type fastq         --unknown_estimation         -o results/metaphlan_out/DNA_B02_15/DNA_B02_15.metaphlan_profile.txt
+        
+Activating conda environment: .snakemake/conda/d5b3ff809972f7023fabd2f02227b380
+WARNING: The metagenome profile contains clades that represent multiple species merged into a single representant.
+An additional column listing the merged species is added to the MetaPhlAn output.
+[Mon May  9 21:57:14 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Pipeline set to use the following assmbler(s): ['megahit', 'spades']
+                sample  ...                              reverse_read
+sample                  ...                                          
+DNA_B02_15  DNA_B02_15  ...  data/DNA_B02_15_S41_L002_R2_001.fastq.gz
+DNA_B01_21  DNA_B01_21  ...  data/DNA_B01_21_S19_L001_R2_001.fastq.gz
+DNA_B01_27  DNA_B01_27  ...  data/DNA_B01_27_S25_L001_R2_001.fastq.gz
+DNA_B03_19  DNA_B03_19  ...  data/DNA_B03_19_S18_L001_R2_001.fastq.gz
+DNA_B01_04  DNA_B01_04  ...   data/DNA_B01_04_S4_L001_R2_001.fastq.gz
+DNA_B02_23  DNA_B02_23  ...  data/DNA_B02_23_S47_L002_R2_001.fastq.gz
+DNA_B02_02  DNA_B02_02  ...  data/DNA_B02_02_S31_L002_R2_001.fastq.gz
+DNA_B01_02  DNA_B01_02  ...   data/DNA_B01_02_S2_L001_R2_001.fastq.gz
+DNA_B01_03  DNA_B01_03  ...   data/DNA_B01_03_S3_L001_R2_001.fastq.gz
+DNA_B01_01  DNA_B01_01  ...   data/DNA_B01_01_S1_L001_R2_001.fastq.gz
+DNA_B02_24  DNA_B02_24  ...  data/DNA_B02_24_S48_L002_R2_001.fastq.gz
+DNA_B03_15  DNA_B03_15  ...  data/DNA_B03_15_S14_L001_R2_001.fastq.gz
+
+[12 rows x 4 columns]

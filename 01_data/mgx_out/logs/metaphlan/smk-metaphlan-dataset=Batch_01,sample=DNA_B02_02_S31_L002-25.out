@@ -1,0 +1,27 @@
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 20
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Fri Apr 15 14:04:43 2022]
+rule metaphlan:
+    input: resources/metaphlan_db, results/Batch_01/bwa/DNA_B02_02_S31_L002.clean.R1.fastq, results/Batch_01/bwa/DNA_B02_02_S31_L002.clean.R2.fastq
+    output: results/Batch_01/abundance/metaphlan/DNA_B02_02_S31_L002.metaphlan_profile.txt, results/Batch_01/abundance/metaphlan/DNA_B02_02_S31_L002.bowtie2.bz2
+    jobid: 0
+    wildcards: dataset=Batch_01, sample=DNA_B02_02_S31_L002
+    threads: 20
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=50g, time=04:00:00
+
+
+        metaphlan results/Batch_01/bwa/DNA_B02_02_S31_L002.clean.R1.fastq,results/Batch_01/bwa/DNA_B02_02_S31_L002.clean.R2.fastq         --bowtie2out results/Batch_01/abundance/metaphlan/DNA_B02_02_S31_L002.bowtie2.bz2         --index mpa_v30_CHOCOPhlAn_201901         --bowtie2db resources/metaphlan_db         --nproc 20         --input_type fastq         --unknown_estimation         -o results/Batch_01/abundance/metaphlan/DNA_B02_02_S31_L002.metaphlan_profile.txt
+        
+Activating conda environment: .snakemake/conda/d5b3ff809972f7023fabd2f02227b380
+WARNING: The metagenome profile contains clades that represent multiple species merged into a single representant.
+An additional column listing the merged species is added to the MetaPhlAn output.
+[Fri Apr 15 14:06:09 2022]
+Finished job 0.
+1 of 1 steps (100%) done

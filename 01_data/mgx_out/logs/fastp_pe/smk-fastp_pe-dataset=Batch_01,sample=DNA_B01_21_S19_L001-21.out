@@ -1,0 +1,131 @@
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Fri Apr 15 13:41:12 2022]
+rule fastp_pe:
+    input: data/Batch_01/DNA_B01_21_S19_L001_R1_001.fastq.gz, data/Batch_01/DNA_B01_21_S19_L001_R2_001.fastq.gz
+    output: results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R1.fastq.gz, results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R2.fastq.gz, results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.json, results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.html
+    jobid: 0
+    wildcards: dataset=Batch_01, sample=DNA_B01_21_S19_L001
+    threads: 16
+    resources: mem_mb=5207, disk_mb=5207, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=02:00:00
+
+fastp -i data/Batch_01/DNA_B01_21_S19_L001_R1_001.fastq.gz -I data/Batch_01/DNA_B01_21_S19_L001_R2_001.fastq.gz --out1 results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R1.fastq.gz --out2 results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.json -h results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.html -V
+Activating conda environment: .snakemake/conda/e465827c50588ca6f951e286e693b21d
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+[13:41:22] start to load data
+[13:41:35] loaded 1M read pairs
+[13:41:49] loaded 2M read pairs
+[13:42:1] loaded 3M read pairs
+[13:42:14] loaded 4M read pairs
+[13:42:28] loaded 5M read pairs
+[13:42:41] loaded 6M read pairs
+[13:42:55] loaded 7M read pairs
+[13:43:9] loaded 8M read pairs
+[13:43:23] loaded 9M read pairs
+[13:43:37] loaded 10M read pairs
+[13:43:50] loaded 11M read pairs
+[13:44:4] loaded 12M read pairs
+[13:44:18] loaded 13M read pairs
+[13:44:32] loaded 14M read pairs
+[13:44:46] loaded 15M read pairs
+[13:44:59] loaded 16M read pairs
+[13:45:13] loaded 17M read pairs
+[13:45:27] loaded 18M read pairs
+[13:45:40] loaded 19M read pairs
+[13:45:54] loaded 20M read pairs
+[13:45:54] all reads loaded, start to monitor thread status
+[13:45:54] thread 3 is processing the 20031 / 20033 pack
+[13:45:54] thread 8 data processing completed
+[13:45:54] thread 8 finished
+[13:45:54] thread 7 data processing completed
+[13:45:54] thread 16 data processing completed
+[13:45:54] thread 16 finished
+[13:45:54] thread 7 finished
+[13:45:54] thread 6 data processing completed
+[13:45:54] thread 6 finished
+[13:45:54] thread 11 data processing completed
+[13:45:54] thread 11 finished
+[13:45:54] thread 9 data processing completed
+[13:45:54] thread 9 finished
+[13:45:54] thread 15 data processing completed
+[13:45:54] thread 15 finished
+[13:45:54] thread 12 data processing completed
+[13:45:54] thread 12 finished
+[13:45:54] thread 1 data processing completed
+[13:45:54] thread 1 finished
+[13:45:54] thread 2 data processing completed
+[13:45:54] thread 2 finished
+[13:45:54] thread 5 data processing completed
+[13:45:54] thread 5 finished
+[13:45:54] thread 3 data processing completed
+[13:45:54] thread 3 finished
+[13:45:54] thread 13 data processing completed
+[13:45:54] thread 13 finished
+[13:45:54] thread 4 data processing completed
+[13:45:54] thread 4 finished
+[13:45:54] thread 10 data processing completed
+[13:45:54] thread 10 finished
+[13:45:54] thread 14 data processing completed
+[13:45:54] thread 14 finished
+[13:45:54] results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R1.fastq.gz writer finished
+[13:45:54] results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R2.fastq.gz writer finished
+[13:45:54] start to generate reports
+
+Read1 before filtering:
+total reads: 20032037
+total bases: 3024837587
+Q20 bases: 2902883644(95.9682%)
+Q30 bases: 2773162861(91.6797%)
+
+Read2 before filtering:
+total reads: 20032037
+total bases: 3024837587
+Q20 bases: 2888237806(95.4841%)
+Q30 bases: 2703996029(89.3931%)
+
+Read1 after filtering:
+total reads: 19611693
+total bases: 2027112101
+Q20 bases: 2002954432(98.8083%)
+Q30 bases: 1949912229(96.1916%)
+
+Read2 aftering filtering:
+total reads: 19611693
+total bases: 2027770775
+Q20 bases: 1988862188(98.0812%)
+Q30 bases: 1906929881(94.0407%)
+
+Filtering result:
+reads passed filter: 39223386
+reads failed due to low quality: 357488
+reads failed due to too many N: 2902
+reads failed due to too short: 480298
+reads with adapter trimmed: 34399646
+bases trimmed due to adapters: 1826609535
+
+Duplication rate: 14.8367%
+
+Insert size peak (evaluated by paired-end reads): 82
+
+JSON report: results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.json
+HTML report: results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.html
+
+fastp -i data/Batch_01/DNA_B01_21_S19_L001_R1_001.fastq.gz -I data/Batch_01/DNA_B01_21_S19_L001_R2_001.fastq.gz --out1 results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R1.fastq.gz --out2 results/Batch_01/filtered/DNA_B01_21_S19_L001.filtered.R2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.json -h results/Batch_01/filtered/DNA_B01_21_S19_L001_fastp.html -V 
+fastp v0.20.1, time used: 286 seconds
+[Fri Apr 15 13:46:00 2022]
+Finished job 0.
+1 of 1 steps (100%) done

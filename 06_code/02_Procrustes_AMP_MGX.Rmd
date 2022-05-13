@@ -1,0 +1,615 @@
+---
+title: "02_Procrustes_AMP_MGX"
+output: html_document
+---
+
+```
+Notes on sample analysis
+Sample DNA_B02_20 does not have a shotgun counterpart and is exclused for procruste analyssis
+Sample from patient 1054-BAL-00 was sequenced twice and therefore is only included once
+
+```
+
+# Cleaning 16S data
+```{r}
+cran_packages <- c("reshape2", "ggplot2", "vegan", "stringr", "gridExtra", "ape", "RColorBrewer", 
+                   "dplyr", "knitr","cowplot","openxlsx")
+                   #, "circlize", "plotly")
+bioc_packages <- c("phyloseq","decontam")
+sapply(c(cran_packages, bioc_packages), require, character.only = TRUE)
+
+library(tidyverse)
+library(qiime2R)
+library(ggpubr)
+```
+# Helper Functions
+
+## Helper Functions for 16S Analysis
+```{r}
+# Plot Library Size 
+plot_library_size <- function(ps){
+  df <- as.data.frame(sample_data(ps)) # Put sample_data into a ggplot-friendly data.frame
+  df$LibrarySize <- sample_sums(ps)
+  df <- df[order(df$LibrarySize),]
+  df$Index <- seq(nrow(df))
+  
+  p1 <- ggplot(data=df, aes(x=Index, y=LibrarySize, color=sample.type)) + 
+    geom_point()
+  return(p1)
+}
+
+
+# Decontaminate phyloseq object + basic qc
+decontaminate_phyloseq <- function(ps){
+  # Get blanks
+  sample_data(ps)$is.neg <- sample_data(ps)$Sample_or_Control == "Control-Sample"
+  
+  # Get dataframe of contaminants
+  contamdf.prev05 <- isContaminant(
+    ps, 
+    method="prevalence",
+    neg="is.neg", 
+    threshold=0.5
+    )
+  # Prune contaminant taxa at the threshold .05 (> prevalence in control=contaminant)
+  final_biom <- prune_taxa(!contamdf.prev05$contaminant, ps)
+  final_biom <- subset_taxa(final_biom, !is.na(Phylum) & !Phylum %in% c("", "uncharacterized"))
+  final_biom <- subset_taxa(final_biom, !is.na(Genus) & !Genus %in% c("", "uncultured"))
+  final_biom <- prune_taxa(taxa_sums(final_biom) >= 2, final_biom)
+}
+
+
+
+tidy_phyloseq <- function(final_biom){
+  library(tidyverse)
+  library(dplyr)
+
+    final_biom <- tax_glom(final_biom, taxrank = "Genus")
+  final_biom_melt <- psmelt(final_biom)
+
+  grouped_final<- final_biom_melt %>% #mutate_at(c("Sample", "OTU", "Genus"), as.factor) %>%
+    as_tibble() %>% filter(sample.type == "bal-sample") %>% 
+    #filter(patient.id %in% c(1001, 1002, 1042)) %>%
+    select(Sample, OTU, Abundance, Genus) %>% 
+    group_by(Sample) %>%
+    mutate(SampleTotAbundance = sum(Abundance)) %>%
+    ungroup() %>% 
+    mutate(GeneraAbundancePerSample = Abundance/SampleTotAbundance) %>% 
+    group_by(Genus) %>%
+    mutate(meanGeneraAbundancePerSample = mean(GeneraAbundancePerSample)) %>%
+    mutate(medGeneraAbundancePerSample = median(GeneraAbundancePerSample))
+  
+  top_genera <- grouped_final %>% filter(meanGeneraAbundancePerSample > 0.01) %>% 
+      select(Genus) %>% unique() %>% 
+      pluck(1)
+  top_genera
+  
+  
+  # grouped_final %>% 
+  # select(Sample, 
+  #        OTU, Abundance, 
+  #        Genus, SampleTotAbundance, GeneraAbundancePerSample, meanGeneraAbundancePerSample,
+  #       medGeneraAbundancePerSample)%>%
+  #     arrange(desc(meanGeneraAbundancePerSample))
+  
+  # top_genera
+  other_taxa <- c("Kingdom", "Phylum", "Class","Order","Family")
+  
+  top_abund <- final_biom_melt %>% 
+      filter(Genus %in% top_genera) %>%
+      select(!c(Kingdom, Phylum, Class, Order, Family, OTU))
+  
+  
+  
+  low_abund <- final_biom_melt %>% filter(!Genus %in% top_genera) %>% mutate(Genus = "Z_RareTaxa")
+  
+  low_abund_melt <- low_abund %>% 
+      group_by(Sample) %>% 
+      mutate(AbundanceOtherTotal = sum(Abundance)) %>% 
+      ungroup() %>% 
+      select(!c(Kingdom, Phylum, Class, Order, Family, Abundance, OTU)) %>% unique() %>%
+      rename(Abundance = AbundanceOtherTotal) %>%
+      relocate(Sample)
+  
+  
+  fmn_new <- rbind(top_abund, low_abund_melt)
+  
+}
+```
+
+## Helper Functions for MGX Analysis
+```{r}
+# Function to Clean metaphlan results for mapping (Globs Rare Genera, general Cleaning)
+clean_mpa4bar <- function(mpa, mapping){
+    mpa_tmp <- mpa %>% 
+      pivot_longer(cols = 2:last_col(), names_to="Sample", values_to="Abundance") %>%
+      rename(Genus = "sample") %>%
+      separate(Sample, into="Sample", sep=".metaphlan_profile", extra = "drop") %>%
+      left_join(mapping, by = c("Sample"="ShotgunSequencingFileName")) %>%
+      select(!c(Sample, SampleID, DNATubeID)) %>%
+      rename(Sample = "BALPatientID") 
+    
+    mpa_tmp_grouped <- mpa_tmp %>%
+      group_by(Genus) %>% 
+      mutate(sum_gen = sum(Abundance)) %>%
+      filter(sum_gen > 0) %>%
+      select(!sum_gen) %>%
+      mutate(meanGeneraAbundancePerSample = mean(Abundance))
+  
+  top_genera <- mpa_tmp_grouped %>% filter(meanGeneraAbundancePerSample > 1) %>% 
+        select(Genus) %>% 
+        unique() %>% 
+        pluck(1)
+  top_genera
+  
+  
+  top_abund <- mpa_tmp %>% 
+        filter(Genus %in% top_genera)
+    
+    
+  low_abund <- mpa_tmp %>% filter(!Genus %in% top_genera) %>% mutate(Genus = "Z_RareTaxa")
+  
+  low_abund_melt <- low_abund %>% 
+      group_by(Sample) %>% 
+      mutate(AbundanceOtherTotal = sum(Abundance)) %>% 
+      ungroup() %>% 
+      select(!Abundance) %>%
+      unique() %>%
+      rename(Abundance = AbundanceOtherTotal) %>%
+      relocate(Sample)
+    
+    
+  mpa_clean <- rbind(top_abund, low_abund_melt) 
+  return(mpa_clean)
+}
+
+get_separate_legend <- function(a_ggplot){
+  a_legend <- cowplot::get_legend(p1)
+  as_ggplot(a_legend)
+}
+
+```
+
+# 16S Analysis
+```{r}
+
+# Load in qiime2 data
+ps <- qza_to_phyloseq(
+    features="../01_data/amp_out/qiime2_out/table.qza",
+    tree="../01_data/amp_out/qiime2_out/rooted-tree.qza",
+    "../01_data/amp_out/qiime2_out/taxonomy.qza",
+    metadata = "../02_metadata/qiime2_sample-metadata.tsv"
+    )
+```
+
+```{r}
+plot_library_size(ps)
+```
+Decontaminate 16S Data based on NTC controls
+```{r}
+phyloseq_clean <- decontaminate_phyloseq(ps)
+```
+
+Wrangle 16S data into a tidy format
+```{r}
+phyloseq_tidy <- tidy_phyloseq(phyloseq_clean)
+```
+
+
+
+
+```{r}
+
+fmn_new_filt <- phyloseq_tidy %>% 
+  filter(sample.type == "bal-sample") %>% 
+  filter(!Sample =="003-CORYN340197071-CN2") %>% #drop 1504 duplicate
+  filter(!Sample == "003-KLEPNE340197051-KE4") #drop not shotguns
+
+  
+
+p4 <- ggplot(fmn_new_filt, aes(x=patient.id1, y=Abundance, fill=Genus)) +
+  geom_bar(color="black", stat="identity", position="fill") +
+  ylab("Relative Abundance") +
+  xlab("Samples") +
+  ggtitle("Metataxonomics") + 
+  theme_pubclean() + 
+  rotate_x_text()
+
+
+p4 + theme(legend.position="none")
+
+get_separate_legend <- function(a_ggplot){
+  a_legend <- cowplot::get_legend(p1)
+  as_ggplot(a_legend)
+}
+
+p4_legend <- get_separate_legend(p4)
+
+ggsave("../05_figures/14_AMP_StackedBar_Fourteen.pdf",
+       p4, width = 8, height=5, units = "in")
+
+ggsave("../05_figures/14_AMP_StackedBar_Fourteen_LegendFree.pdf",
+       p4 + theme(legend.position="none"), width = 8, height=5, units = "in")
+
+ggsave("../05_figures/14_AMP_StackedBar_Fourteen_LegendOnly.pdf", p4_legend,
+       width = 8, height=5, units = "in")
+```
+# Metaphlan Analysis
+
+```{r}
+
+mapping <- read_csv(file = "../02_metadata/AMP2MGZ_map.csv")
+
+setwd( 
+  "../01_data/mgx_out/metaphlan_merged"
+  )
+
+# Convert metaphlan output to a Sample x Taxa abundance matrix
+mpa <- read_table("./merged_metaphlan_profile_genus.tsv") %>% 
+    # Delete if update mlm sample sheet
+    rename("DNA_B04_32.metaphlan_profile" = "DNA_B04_32_R1.metaphlan_profile") %>% 
+    rename("DNA_B04_41.metaphlan_profile" = "DNA_B04_41_R1.metaphlan_profile")
+
+mpa_clean_bar <- clean_mpa4bar(mpa, mapping)
+
+mpa_clean_bar
+```
+
+```{r}
+p13 <- ggplot(mpa_clean_bar, aes(x=Sample, y=Abundance, fill=Genus)) +
+  geom_bar(color="black", stat="identity", position="fill") +
+  ylab("Relative Abundance") +
+  ggtitle("Shotgun Metagenomics: Metaphlan Profile") + 
+  theme_pubclean() + 
+  rotate_x_text()
+
+p13_legend <- get_separate_legend(p1)
+
+p13 
+```
+
+```{r}
+ggsave("../05_figures/13_MGX_StackedBar_Fourteen.pdf",
+       p13, width = 8, height=5, units = "in")
+
+ggsave("../05_figures/13_MGX_StackedBar_Fourteen_LegendFree.pdf",
+       p13 + theme(legend.position="none"), width = 8, height=5, units = "in")
+
+ggsave("../05_figures/13_MGX_StackedBar_Fourteen_LegendOnly.pdf", p13_legend,
+       width = 8, height=5, units = "in")
+
+```
+
+
+
+## Visualizing 16S and MGX wiht the Same Legend
+So the overall logic for this step is to get the combined set of genera represented in both amplicon and metagenomic data legends. From there, genera that are not represented in the other sequencing methods legend are added to the tidied data fram of the other. So, e.g., the genera in the mgx legend that aren't represented in the amp legend are added to the amp data frame. The "sample" is called "PLAY" and all abundances are set to 0 so that they can be easily cropped out.
+
+For the legend, NA is unknown and Z_RareTaxa have the Z in front to force it to be the last genera in it.
+```{r}
+
+#colourCount = length(unique(fmn_new_filt$Genus))
+#getPalette = colorRampPalette(brewer.pal(9, "Set1"))
+#p1 + scale_fill_manual(values = getPalette(colourCount))
+
+# Set unknown to NA in mpa
+mpa_clean_bar_filt<- mpa_clean_bar 
+mpa_clean_bar_filt$Genus[which(mpa_clean_bar_filt$Genus == "UNKNOWN")] <- NA
+
+# Clean up amp
+fmn_new_filt <- phyloseq_tidy %>% 
+  filter(sample.type == "bal-sample") %>% 
+  filter(!Sample =="003-CORYN340197071-CN2") %>% #drop 1504 duplicate
+  filter(!Sample == "003-KLEPNE340197051-KE4") %>% #drop not shotguns
+  select(Genus, Abundance, patient.id1) %>%
+  rename(Sample = "patient.id1")
+
+#fmn_new_filt$Genus %>% unique #11
+#mpa_clean_bar_filt$Genus %>% unique #17
+#intersect(fmn_new_filt$Genus %>% unique, mpa_clean_bar_filt$Genus %>% unique) #8
+# union(fmn_new_filt$Genus %>% unique, mpa_clean_bar_filt$Genus %>% unique)#20
+
+# First, get unioned list of genera (all repped genera) + set as fake df for binding
+rep_genera <- union(fmn_new_filt$Genus %>% unique, mpa_clean_bar_filt$Genus %>% unique) %>% as_tibble()
+rep_genera$Abundance <- 0
+rep_genera$Sample <- "PLAY"
+rep_genera <- rep_genera %>% rename(Genus = "value")
+
+
+# Set mpa with correct number of genera
+mpa_clean_bar_repGenera <- rbind(mpa_clean_bar_filt, rep_genera)
+
+# Set 16S with correct number of genera
+fmn_new_filt_repGenera <- rbind(fmn_new_filt, rep_genera)
+```
+## Visualize consensus 
+
+Consensus colors with 16S/amp
+```{r}
+# Prep Color Pallete
+c25 <- c(
+  "dodgerblue2", "#E31A1C", # red
+  "green4",
+  "#6A3D9A", # purple
+  "#FF7F00", # orange
+  "black", "gold1",
+  "skyblue2", "#FB9A99", # lt pink
+  "palegreen2",
+  "#CAB2D6", # lt purple
+  "#FDBF6F", # lt orange
+  "gray70", "khaki2",
+  "maroon", "orchid1", "deeppink1", "blue1", "steelblue4",
+  "darkturquoise", "green1", "yellow4", "yellow3",
+  "darkorange4", "brown"
+)
+
+colourCount = length(unique(fmn_new_filt_repGenera$Genus))
+#getPalette = colorRampPalette(brewer.pal(9, "Set1"))
+getPalette = colorRampPalette(c25)
+
+p16 <- ggplot(fmn_new_filt_repGenera, aes(x=Sample, y=Abundance, fill=Genus)) +
+  geom_bar(color="black", stat="identity", position="fill") +
+  ylab("Relative Abundance") +
+  ggtitle("Amplicon Sequencing") + 
+  theme_pubclean() + 
+  rotate_x_text() +
+  scale_fill_manual(values = getPalette(colourCount))
+p16_legend <- get_separate_legend(p17)
+
+p16
+```
+
+
+Consensus colors with mgx
+```{r}
+
+p17 <- ggplot(mpa_clean_bar_repGenera, aes(x=Sample, y=Abundance, fill=Genus)) +
+  geom_bar(color="black", stat="identity", position="fill") +
+  ylab("Relative Abundance") +
+  ggtitle("Shotgun Metagenomic Sequencing") + 
+  theme_pubclean() + 
+  rotate_x_text() +
+  scale_fill_manual(values = getPalette(colourCount))
+p17_legend <- get_separate_legend(p17)
+
+p17 
+```
+
+
+Now just trying to show the repeat sampled ones
+
+```{r}
+# Prep Color Pallete
+c25 <- c(
+  "dodgerblue2", "#E31A1C", # red
+  "green4",
+  "#6A3D9A", # purple
+  "#FF7F00", # orange
+  "black", "gold1",
+  "skyblue2", "#FB9A99", # lt pink
+  "palegreen2",
+  "#CAB2D6", # lt purple
+  "#FDBF6F", # lt orange
+  "gray70", "khaki2",
+  "maroon", "orchid1", "deeppink1", "blue1", "steelblue4",
+  "darkturquoise", "green1", "yellow4", "yellow3",
+  "darkorange4", "brown"
+)
+
+colourCount = length(unique(fmn_new_filt_repGenera$Genus))
+#getPalette = colorRampPalette(brewer.pal(9, "Set1"))
+getPalette = colorRampPalette(c25)
+#p1 + scale_fill_manual(values = getPalette(colourCount))
+repGenera_metadata <- fmn_new_filt_repGenera %>% separate(Sample, into = c("patient.id", NA, "repeat.id"), sep="-") %>%
+  select(patient.id, repeat.id)
+
+fmn_new_filt_repGenera_meta <- cbind(fmn_new_filt_repGenera, repGenera_metadata)
+
+fmn_new_filt_repGenera_metas <- fmn_new_filt_repGenera_meta %>% filter(patient.id %in% c(1001, 1002, 1042, 'PLAY'))
+
+p3 <- ggplot(fmn_new_filt_repGenera_metas, aes(x=as.factor(repeat.id), y=Abundance, fill=Genus)) + 
+  geom_bar(color="black", stat="identity", position="fill") + 
+  theme(axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=1)) + 
+  facet_wrap(~patient.id, scales="free_x", nrow=1) + 
+  theme(text = element_text(size = 15)) +
+  ylab("Relative Abundance") + 
+  xlab("Day Since First BAL") + 
+  theme_pubclean() + rotate_x_text() +
+  scale_fill_manual(values = getPalette(colourCount))
+p3
+```
+Save them
+
+```{r}
+
+ggsave("../05_figures/14_AMP_StackedBar_Fourteen.pdf",
+       p16, width = 8, height=5, units = "in")
+ggsave("../05_figures/14_AMP_StackedBar_Fourteen_LegendFree.pdf",
+       p16 + theme(legend.position="none"), width = 8, height=5, units = "in")
+ggsave("../05_figures/14_AMP_StackedBar_Fourteen_LegendOnly.pdf", 
+       p16_legend, width = 8, height=5, units = "in")
+
+
+ggsave("../05_figures/13_MGX_StackedBar_Fourteen.pdf",
+       p17, width = 8, height=5, units = "in")
+
+ggsave("../05_figures/13_MGX_StackedBar_Fourteen_LegendFree.pdf",
+       p17 + theme(legend.position="none"), width = 8, height=5, units = "in")
+
+ggsave("../05_figures/13_MGX_StackedBar_Fourteen_LegendOnly.pdf", p17_legend,
+       width = 8, height=5, units = "in")
+
+ggsave("../05_figures/13_MGX_StackedBar_Fourteen_LegendOnly.pdf", p17_legend,
+       width = 8, height=5, units = "in")
+
+ggsave("../05_figures/16_AMP_StackedBar_ConsensusLegend.pdf", p3,
+       width = 8, height=5, units = "in")
+
+```
+
+# Procruste Analysis
+
+## Prepare Abudance matrix for distance metric
+```{r}
+
+otus<- tax_glom(phyloseq_clean, taxrank = "Genus") %>% 
+  psmelt() %>%  
+  as_tibble() %>% 
+  filter(sample.type == "bal-sample") %>% 
+  filter(!Sample =="003-CORYN340197071-CN2") %>% #drop 1504 duplicate
+  filter(!Sample == "003-KLEPNE340197051-KE4") %>% #drop not shotguns
+  #filter(patient.id %in% c(1001, 1002, 1042)) %>%
+  select(patient.id1, OTU, Abundance, Genus) %>% 
+  group_by(patient.id1) %>%
+  mutate(SampleTotAbundance = sum(Abundance)) %>%
+  ungroup() %>% 
+  mutate(GeneraAbundancePerSample = Abundance/SampleTotAbundance) %>% 
+  select(patient.id1, GeneraAbundancePerSample, Genus) %>%
+  rename(Abundance = "GeneraAbundancePerSample") %>% 
+  pivot_wider(names_from=Genus, values_from=Abundance) %>% 
+  arrange(patient.id1) %>% # Arrange so order is the same between each
+  column_to_rownames("patient.id1") %>% 
+  as.matrix()
+otus
+```
+
+## Prepare matrix for distance matrix from Metaphlan Data
+```{r}
+mapping <- read_csv(file = "../02_metadata/AMP2MGZ_map.csv")
+
+setwd( "../01_data/mgx_out/metaphlan_merged")
+
+# Convert metaphlan output to a Sample x Taxa abundance matrix
+mpa <- read_table("./merged_metaphlan_profile_genus.tsv") %>% 
+    rename("DNA_B04_32.metaphlan_profile" = "DNA_B04_32_R1.metaphlan_profile") %>% # Delete if update mlm sample sheet
+    rename("DNA_B04_41.metaphlan_profile" = "DNA_B04_41_R1.metaphlan_profile") %>%
+    filter(!DNA_B03_19.metaphlan_profile == 100) %>%
+    #select(!"DNA_B03_19_S18_L001.metaphlan_profile") %>%
+    pivot_longer(cols = 2:last_col(), names_to = "Samples", values_to="Abundance") %>%
+    separate(Samples, into="Samples", sep=".meta", extra = "drop") %>%
+    pivot_wider(names_from=sample, values_from=Abundance) %>% 
+    left_join(mapping, by = c("Samples"="ShotgunSequencingFileName")) %>%
+    select(!c(Samples, SampleID, DNATubeID)) %>%
+    rename(Samples = "BALPatientID") %>%
+#    filter(Samples %in% c("1001-BAL-00",
+#                        "1001-BAL-03",
+#                        "1002-BAL-00",
+#                        "1002-BAL-03",
+#                        "1042-BAL-00",
+#                        "1042-BAL-04")) %>%
+    arrange(Samples) %>%
+    column_to_rownames("Samples") %>% 
+    as.matrix()
+mpa
+```
+# Distance
+```{r}
+library(vegan)
+library(ade4)
+library(ggprism)
+library(ggrepel)
+
+# Prepare bray distance, check for negative eignevectors, if appropriate, perfor [Carriez correction](https://john-quensen.com/tutorials/procrustes-analysis/)
+amp_bray <- vegdist(otus, method="bray")
+add <-!(is.euclid(amp_bray))
+pcoa.amp <- cmdscale(amp_bray, k = nrow(otus)-1, eig = TRUE, add = add)
+ordiplot(pcoa.amp, type = "text", main = "PCoA for Species Data, Bray Distances")
+
+pcoa.amp_df <- pcoa.amp$points %>% as.data.frame()
+pcoa.amp_df["Sample"] <- rownames(pcoa.amp_df)
+p9 <- ggplot(pcoa.amp_df, aes(x=V1, y=V2, label = Sample)) +
+  geom_point() +
+  geom_text_repel() +
+  xlab("Dimension 1") +
+  ylab("Dimension 2") +
+  ggtitle("PCoA for Amplicon Sequencing Data (Genus), Bray Curtis") +
+  theme_prism()
+p9
+ggsave("../05_figures/09_AMP_PCoA_BC.pdf",p9,
+     height=5, width=5, units="in")
+```
+
+```{r}
+# Prepare bray distance for shotgun
+mpa_bray <- vegdist(mpa, method="bray")
+add <-!(is.euclid(mpa_bray))
+pcoa.mpa <- cmdscale(mpa_bray, k = nrow(mpa)-1, eig = TRUE, add = add)
+ordiplot(pcoa.mpa, type = "text", main = "PCoA for Species Data, Bray Distances")
+
+pcoa.mpa_df <- pcoa.mpa$points %>% as.data.frame()
+pcoa.mpa_df["Sample"] <- rownames(pcoa.mpa_df)
+p10 <- ggplot(pcoa.mpa_df, aes(x=V1, y=V2, label = Sample)) +
+  geom_point() +
+  geom_text_repel() +
+  xlab("Dimension 1") +
+  ylab("Dimension 2") +
+  ggtitle("PCoA for Shotgun Sequencing Data (Genus), Bray Curtis") +
+  theme_prism()
+p10
+ggsave("../05_figures/10_MGX_PCoA_BC.pdf",p10,
+     height=5, width=5, units="in")
+```
+Procrustes Analysis
+```{r}
+pro.1 <- procrustes(pcoa.amp, pcoa.mpa, symmetric = TRUE, scores = "sites",  
+                    choices = c(1,2))
+pro.1
+
+pdf(file="../05_figures/11_PROCRUSTE.pdf")
+plot(pro.1, kind = 1, type="text")
+dev.off()
+
+pcoa.mpa_df %>% right_join(mapping, by = c("Sample" = "BALPatientID"))
+
+```
+
+So we have the procrustes data but we want to use ggplot, so we gotta prepare the data in tidy format
+```{r}
+
+library(ggplot2)
+library(grid)
+
+# clean mapping file to make shapes in procruste
+mapping_alt <- mapping %>% 
+  separate(BALPatientID, into = c("PatientID", NA, "RepID"), sep="-") 
+mapping_BAL <- mapping_alt %>% 
+  filter(RepID == '00') %>% 
+  mutate(BAL = "Baseline")
+mapping_BAL_2 <- mapping_alt %>% 
+  filter(!RepID == '00') %>% 
+  mutate(BAL = "FollowUp")
+mapping_alt <- rbind(mapping_BAL, mapping_BAL_2) %>% 
+  select(SampleID, PatientID, BAL) %>%
+  left_join(mapping)
+mapping_alt
+
+
+ctest <- data.frame(rda1=pro.1$Yrot[,1],
+rda2=pro.1$Yrot[,2],xrda1=pro.1$X[,1],
+xrda2=pro.1$X[,2])
+ctest["Samples"] <- rownames(ctest)
+ctest_meta <- ctest %>% left_join(mapping_alt, by = c("Samples" = "BALPatientID"))
+ctest_meta$BAL <- as.factor(ctest_meta$BAL)
+```
+
+```{r}
+p12<-ggplot(ctest_meta) +
+  geom_point(aes(x=rda1, y=rda2, fill=PatientID, pch=BAL), colour="black", size=5) +
+  geom_point(aes(x=xrda1, y=xrda2, fill=PatientID, pch=BAL),colour="black", size=5) +
+  geom_segment(aes(x=rda1,y=rda2,xend=xrda1,yend=xrda2),arrow=arrow(length=unit(0.2,"cm"))) +
+  xlab("Dimension 1") +
+  ylab("Dimension 2") +
+  ggtitle("Procrustes Analysis ") + 
+  scale_fill_brewer(guide="legend", palette="Spectral") +
+  scale_shape_manual(values=c(21, 22)) +
+  guides(fill=guide_legend(override.aes=list(shape=21))) +
+  theme_prism()
+p12
+
+ggsave("../05_figures/12_PROCRUSTE_AMP_MGX_ggplot.pdf", p12, width=4, height=4, units="in")
+```
+
+```{r}
+protest(X = pcoa.amp, Y = pcoa.mpa, scores = "sites", permutations = 999)
+```
+

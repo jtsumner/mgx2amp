@@ -1,0 +1,75 @@
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 20
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Mon May  9 22:02:18 2022]
+rule megahit:
+    input: results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r1.fastq, results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r2.fastq
+    output: results/megahit_out/DNA_B02_24/DNA_B02_24.contigs.fa
+    jobid: 0
+    wildcards: sample=DNA_B02_24
+    threads: 20
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=100g, time=10:00:00
+
+
+        module load megahit/1.0.6.1
+        megahit -t 20 -m 0.9 -1 results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r1.fastq -2 results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r2.fastq --out-prefix DNA_B02_24 -o results/megahit_out/DNA_B02_24_tmp
+        mv results/megahit_out/DNA_B02_24_tmp/* results/megahit_out/DNA_B02_24
+        rmdir results/megahit_out/DNA_B02_24_tmp
+        
+188.385Gb memory in total.
+Using: 169.547Gb.
+MEGAHIT v1.0.6.1
+--- [Mon May  9 22:02:20 2022] Start assembly. Number of CPU threads 20 ---
+--- [Mon May  9 22:02:20 2022] Available memory: 202277072896, used: 182049365606
+--- [Mon May  9 22:02:20 2022] k list: 21,41,61,81,99 ---
+--- [Mon May  9 22:02:20 2022] Converting reads to binaries ---
+b'    [read_lib_functions-inl.h  : 209]     Lib 0 (results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r1.fastq,results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r2.fastq): pe, 700590 reads, 151 max length'
+b'    [utils.h                   : 126]     Real: 0.7450\tuser: 0.5766\tsys: 0.1059\tmaxrss: 47072'
+--- [Mon May  9 22:02:21 2022] Extracting solid (k+1)-mers for k = 21 ---
+--- [Mon May  9 22:02:22 2022] Building graph for k = 21 ---
+--- [Mon May  9 22:02:24 2022] Assembling contigs from SdBG for k = 21 ---
+--- [Mon May  9 22:02:26 2022] Local assembling k = 21 ---
+--- [Mon May  9 22:02:27 2022] Extracting iterative edges from k = 21 to 41 ---
+--- [Mon May  9 22:02:28 2022] Building graph for k = 41 ---
+--- [Mon May  9 22:02:29 2022] Assembling contigs from SdBG for k = 41 ---
+--- [Mon May  9 22:02:31 2022] Local assembling k = 41 ---
+--- [Mon May  9 22:02:32 2022] Extracting iterative edges from k = 41 to 61 ---
+--- [Mon May  9 22:02:33 2022] Building graph for k = 61 ---
+--- [Mon May  9 22:02:34 2022] Assembling contigs from SdBG for k = 61 ---
+--- [Mon May  9 22:02:36 2022] Local assembling k = 61 ---
+--- [Mon May  9 22:02:37 2022] Extracting iterative edges from k = 61 to 81 ---
+--- [Mon May  9 22:02:37 2022] Building graph for k = 81 ---
+--- [Mon May  9 22:02:38 2022] Assembling contigs from SdBG for k = 81 ---
+--- [Mon May  9 22:02:40 2022] Local assembling k = 81 ---
+--- [Mon May  9 22:02:41 2022] Extracting iterative edges from k = 81 to 99 ---
+--- [Mon May  9 22:02:42 2022] Building graph for k = 99 ---
+--- [Mon May  9 22:02:43 2022] Assembling contigs from SdBG for k = 99 ---
+--- [Mon May  9 22:02:44 2022] Merging to output final contigs ---
+--- [STAT] 1816 contigs, total 2922809 bp, min 200 bp, max 13974 bp, avg 1609 bp, N50 2496 bp
+--- [Mon May  9 22:02:44 2022] ALL DONE. Time elapsed: 24.059198 seconds ---
+[Mon May  9 22:02:44 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Pipeline set to use the following assmbler(s): ['megahit', 'spades']
+                sample  ...                              reverse_read
+sample                  ...                                          
+DNA_B02_15  DNA_B02_15  ...  data/DNA_B02_15_S41_L002_R2_001.fastq.gz
+DNA_B01_21  DNA_B01_21  ...  data/DNA_B01_21_S19_L001_R2_001.fastq.gz
+DNA_B01_27  DNA_B01_27  ...  data/DNA_B01_27_S25_L001_R2_001.fastq.gz
+DNA_B03_19  DNA_B03_19  ...  data/DNA_B03_19_S18_L001_R2_001.fastq.gz
+DNA_B01_04  DNA_B01_04  ...   data/DNA_B01_04_S4_L001_R2_001.fastq.gz
+DNA_B02_23  DNA_B02_23  ...  data/DNA_B02_23_S47_L002_R2_001.fastq.gz
+DNA_B02_02  DNA_B02_02  ...  data/DNA_B02_02_S31_L002_R2_001.fastq.gz
+DNA_B01_02  DNA_B01_02  ...   data/DNA_B01_02_S2_L001_R2_001.fastq.gz
+DNA_B01_03  DNA_B01_03  ...   data/DNA_B01_03_S3_L001_R2_001.fastq.gz
+DNA_B01_01  DNA_B01_01  ...   data/DNA_B01_01_S1_L001_R2_001.fastq.gz
+DNA_B02_24  DNA_B02_24  ...  data/DNA_B02_24_S48_L002_R2_001.fastq.gz
+DNA_B03_15  DNA_B03_15  ...  data/DNA_B03_15_S14_L001_R2_001.fastq.gz
+
+[12 rows x 4 columns]

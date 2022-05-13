@@ -1,0 +1,1028 @@
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 40
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Mon May  9 22:00:04 2022]
+rule spades:
+    input: results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq, results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq
+    output: results/spades_out/DNA_B01_01/scaffolds.fasta
+    jobid: 0
+    wildcards: sample=DNA_B01_01
+    threads: 40
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=100g, time=10:00:00
+
+
+        module load spades/3.14.1
+        spades.py -1 results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq -2 results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq -o results/spades_out/DNA_B01_01 -t 40 -m 100 --meta
+        
+Command line: /software/spades/3.14.1/bin/spades.py	-1	/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq	-2	/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq	-o	/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01	-t	40	-m	100	--meta	
+
+System information:
+  SPAdes version: 3.14.1
+  Python version: 3.8.10
+  OS: Linux-3.10.0-862.el7.x86_64-x86_64-with-glibc2.10
+
+Output dir: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01
+Mode: read error correction and assembling
+Debug mode is turned OFF
+
+Dataset parameters:
+  Metagenomic mode
+  Reads:
+    Library number: 1, library type: paired-end
+      orientation: fr
+      left reads: ['/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq']
+      right reads: ['/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq']
+      interlaced reads: not specified
+      single reads: not specified
+      merged reads: not specified
+Read error correction parameters:
+  Iterations: 1
+  PHRED offset will be auto-detected
+  Corrected reads will be compressed
+Assembly parameters:
+  k: [21, 33, 55]
+  Repeat resolution is enabled
+  Mismatch careful mode is turned OFF
+  MismatchCorrector will be SKIPPED
+  Coverage cutoff is turned OFF
+Other parameters:
+  Dir for temp files: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/tmp
+  Threads: 40
+  Memory limit (in Gb): 100
+
+
+======= SPAdes pipeline started. Log can be found here: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/spades.log
+
+/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq: max reads length: 151
+/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq: max reads length: 151
+
+Reads length: 151
+
+
+===== Before start started. 
+
+
+===== Read error correction started. 
+
+
+===== Read error correction started. 
+
+
+== Running: /hpc/software/spades/3.14.1/bin/spades-hammer /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/configs/config.info
+
+  0:00:00.000     7M / 22M   INFO    General                 (main.cpp                  :  75)   Starting BayesHammer, built from refs/heads/spades_3.14.1, git revision 0ace7b8b2f948f633d73db4a506c2d19303265ef
+  0:00:00.001     7M / 22M   INFO    General                 (main.cpp                  :  76)   Loading config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/configs/config.info
+  0:00:00.003     7M / 22M   INFO    General                 (main.cpp                  :  78)   Maximum # of threads to use (adjusted due to OMP capabilities): 40
+  0:00:00.003     7M / 22M   INFO    General                 (memory_limit.cpp          :  49)   Memory limit set to 100 Gb
+  0:00:00.003     7M / 22M   INFO    General                 (main.cpp                  :  86)   Trying to determine PHRED offset
+  0:00:00.003     8M / 22M   INFO    General                 (main.cpp                  :  92)   Determined value is 33
+  0:00:00.004     8M / 22M   INFO    General                 (hammer_tools.cpp          :  38)   Hamming graph threshold tau=1, k=21, subkmer positions = [ 0 10 ]
+  0:00:00.004     8M / 22M   INFO    General                 (main.cpp                  : 113)   Size of aux. kmer data 24 bytes
+     === ITERATION 0 begins ===
+  0:00:00.004     8M / 22M   INFO   K-mer Counting           (kmer_data.cpp             : 280)   Estimating k-mer count
+  0:00:00.414   650M / 650M  INFO   K-mer Counting           (kmer_data.cpp             : 285)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq
+  0:00:00.575   659M / 720M  INFO   K-mer Counting           (kmer_data.cpp             : 294)   Processed 47637 reads
+  0:00:00.576   659M / 720M  INFO   K-mer Counting           (kmer_data.cpp             : 285)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq
+  0:00:00.717   660M / 720M  INFO   K-mer Counting           (kmer_data.cpp             : 294)   Processed 95274 reads
+  0:00:00.718   660M / 720M  INFO   K-mer Counting           (kmer_data.cpp             : 299)   Total 95274 reads processed
+  0:00:02.732   660M / 721M  INFO   K-mer Counting           (kmer_data.cpp             : 302)   Estimated 9566597 distinct kmers
+  0:00:02.790    19M / 721M  INFO   K-mer Counting           (kmer_data.cpp             : 306)   Filtering singleton k-mers
+33 8 0
+nslots: 33554432
+bits per slot: 8 range: 0000000200000000
+  0:00:02.814    67M / 721M  INFO   K-mer Counting           (kmer_data.cpp             : 312)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq
+  0:00:05.202    68M / 721M  INFO   K-mer Counting           (kmer_data.cpp             : 321)   Processed 47637 reads
+  0:00:05.204    68M / 721M  INFO   K-mer Counting           (kmer_data.cpp             : 312)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq
+  0:00:07.343    67M / 721M  INFO   K-mer Counting           (kmer_data.cpp             : 321)   Processed 95274 reads
+  0:00:07.344    67M / 721M  INFO   K-mer Counting           (kmer_data.cpp             : 326)   Total 95274 reads processed
+  0:00:07.345    67M / 721M  INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:07.346    67M / 721M  INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 640 files using 40 threads. This might take a while.
+  0:00:07.347    68M / 721M  INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:07.348    68M / 721M  INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.832892 Gb
+  0:00:07.348    68M / 721M  INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 104857
+  0:00:07.391    26G / 26G   INFO   K-mer Splitting          (kmer_data.cpp             :  97)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq
+  0:00:08.293    26G / 26G   INFO   K-mer Splitting          (kmer_data.cpp             : 107)   Processed 47637 reads
+  0:00:08.295    26G / 26G   INFO   K-mer Splitting          (kmer_data.cpp             :  97)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq
+  0:00:09.825    26G / 26G   INFO   K-mer Splitting          (kmer_data.cpp             : 107)   Processed 95274 reads
+  0:00:09.827    26G / 26G   INFO   K-mer Splitting          (kmer_data.cpp             : 112)   Total 95274 reads processed
+  0:00:09.972   332M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:11.243   332M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 5452534 kmers in total.
+  0:00:11.245   332M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:11.482   332M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:11.620   342M / 5G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:00:11.733   342M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 2536736 bytes occupied (3.72192 bits per kmer).
+  0:00:11.740   288M / 5G    INFO   K-mer Counting           (kmer_data.cpp             : 351)   Arranging kmers in hash map order
+  0:00:12.536   384M / 5G    INFO    General                 (main.cpp                  : 148)   Clustering Hamming graph.
+  0:00:13.299   384M / 5G    INFO    General                 (main.cpp                  : 155)   Extracting clusters
+  0:00:14.534   442M / 5G    INFO    General                 (main.cpp                  : 167)   Clustering done. Total clusters: 5368321
+  0:00:14.540   394M / 5G    INFO   K-mer Counting           (kmer_data.cpp             : 371)   Collecting K-mer information, this takes a while.
+  0:00:14.606   522M / 5G    INFO   K-mer Counting           (kmer_data.cpp             : 377)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq
+  0:00:14.743   490M / 5G    INFO   K-mer Counting           (kmer_data.cpp             : 377)   Processing /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq
+  0:00:14.870   484M / 5G    INFO   K-mer Counting           (kmer_data.cpp             : 384)   Collection done, postprocessing.
+  0:00:14.895   484M / 5G    INFO   K-mer Counting           (kmer_data.cpp             : 398)   There are 5452534 kmers in total. Among them 3330 (0.0610725%) are singletons.
+  0:00:14.896   484M / 5G    INFO    General                 (main.cpp                  : 173)   Subclustering Hamming graph
+  0:00:15.028   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 649)   Subclustering done. Total 1 non-read kmers were generated.
+  0:00:15.029   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 650)   Subclustering statistics:
+  0:00:15.030   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 651)     Total singleton hamming clusters: 5288082. Among them 5186068 (98.0709%) are good
+  0:00:15.031   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 652)     Total singleton subclusters: 2232. Among them 2226 (99.7312%) are good
+  0:00:15.031   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 653)     Total non-singleton subcluster centers: 79337. Among them 77197 (97.3026%) are good
+  0:00:15.032   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 654)     Average size of non-trivial subcluster: 2.07284 kmers
+  0:00:15.033   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 655)     Average number of sub-clusters per non-singleton cluster: 1.01658
+  0:00:15.033   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 656)     Total solid k-mers: 5265491
+  0:00:15.034   481M / 5G    INFO   Hamming Subclustering    (kmer_cluster.cpp          : 657)     Substitution probabilities: [4,4]((0.918816,0.0131287,0.0570751,0.0109804),(0.00415216,0.947552,0.0093438,0.0389517),(0.0162159,0.00401665,0.970811,0.00895689),(0.00509646,0.0250439,0.00675491,0.963105))
+  0:00:15.044   481M / 5G    INFO    General                 (main.cpp                  : 178)   Finished clustering.
+  0:00:15.044   481M / 5G    INFO    General                 (main.cpp                  : 197)   Starting solid k-mers expansion in 40 threads.
+  0:00:15.317   474M / 5G    INFO    General                 (main.cpp                  : 218)   Solid k-mers iteration 0 produced 25628 new k-mers.
+  0:00:15.602   461M / 5G    INFO    General                 (main.cpp                  : 218)   Solid k-mers iteration 1 produced 22 new k-mers.
+  0:00:15.872   451M / 5G    INFO    General                 (main.cpp                  : 218)   Solid k-mers iteration 2 produced 0 new k-mers.
+  0:00:15.873   451M / 5G    INFO    General                 (main.cpp                  : 222)   Solid k-mers finalized
+  0:00:15.874   451M / 5G    INFO    General                 (hammer_tools.cpp          : 222)   Starting read correction in 40 threads.
+  0:00:15.875   451M / 5G    INFO    General                 (hammer_tools.cpp          : 235)   Correcting pair of reads: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq and /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq
+  0:00:16.288   635M / 5G    INFO    General                 (hammer_tools.cpp          : 170)   Prepared batch 0 of 47637 reads.
+  0:00:16.438   637M / 5G    INFO    General                 (hammer_tools.cpp          : 177)   Processed batch 0
+  0:00:16.660   637M / 5G    INFO    General                 (hammer_tools.cpp          : 187)   Written batch 0
+  0:00:16.753   314M / 5G    INFO    General                 (hammer_tools.cpp          : 276)   Correction done. Changed 7761 bases in 4462 reads.
+  0:00:16.754   314M / 5G    INFO    General                 (hammer_tools.cpp          : 277)   Failed to correct 573 bases out of 11340869.
+  0:00:16.774   138M / 5G    INFO    General                 (main.cpp                  : 255)   Saving corrected dataset description to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/corrected.yaml
+  0:00:16.775   138M / 5G    INFO    General                 (main.cpp                  : 262)   All done. Exiting.
+
+===== Read error correction finished. 
+
+
+===== corrected reads compression started. 
+
+
+== Running: /home/jsj3921/.conda/envs/mamba/bin/python /hpc/software/spades/3.14.1/share/spades/spades_pipeline/scripts/compress_all.py --input_file /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/corrected.yaml --ext_python_modules_home /hpc/software/spades/3.14.1/share/spades --max_threads 40 --output_dir /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected --gzip_output
+
+== Compressing corrected reads (with gzip)
+== Files to compress: ['/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/DNA_B01_01.fastp_bwa.r1.00.0_0.cor.fastq', '/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/DNA_B01_01.fastp_bwa.r2.00.0_0.cor.fastq', '/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/DNA_B01_01.fastp_bwa.r_unpaired.00.0_0.cor.fastq']
+== Files compression is finished
+== Dataset yaml file is updated
+
+===== corrected reads compression finished. 
+
+
+===== Read error correction finished. 
+
+
+===== Assembling started. 
+
+
+===== K21 started. 
+
+
+== Running: /hpc/software/spades/3.14.1/bin/spades-core /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/configs/config.info /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/configs/mda_mode.info /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/configs/meta_mode.info
+
+WARNING: Try to use logger before create one. Level=INFO. Message=Additional contigs is tmp_contigs.fasta
+  0:00:00.000     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/configs/config.info
+  0:00:00.000     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/configs/mda_mode.info
+  0:00:00.000     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/configs/meta_mode.info
+  0:00:00.001     8M / 22M   INFO    General                 (memory_limit.cpp          :  49)   Memory limit set to 100 Gb
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  85)   Starting SPAdes, built from refs/heads/spades_3.14.1, git revision 0ace7b8b2f948f633d73db4a506c2d19303265ef
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  86)   Maximum k-mer length: 128
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  87)   Assembling dataset (/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/dataset.info) with K=21
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  88)   Maximum # of threads to use (adjusted due to OMP capabilities): 40
+  0:00:00.001     8M / 22M   INFO    General                 (pipeline.cpp              : 194)   SPAdes started
+  0:00:00.001     8M / 22M   INFO    General                 (pipeline.cpp              : 201)   Starting from stage: read_conversion
+  0:00:00.001     8M / 22M   INFO    General                 (pipeline.cpp              : 207)   Two-step RR enabled: 0
+  0:00:00.001     8M / 22M   INFO   StageManager             (stage.cpp                 : 166)   STAGE == Binary Read Conversion
+  0:00:00.003     8M / 22M   INFO    General                 (read_converter.cpp        :  72)   Converting reads to binary format for library #0 (takes a while)
+  0:00:00.003     8M / 22M   INFO    General                 (read_converter.cpp        :  73)   Converting paired reads
+  0:00:00.324    63M / 63M   INFO    General                 (binary_converter.cpp      :  96)   16384 reads processed
+  0:00:00.362    63M / 63M   INFO    General                 (binary_converter.cpp      :  96)   32768 reads processed
+  0:00:00.532    63M / 63M   INFO    General                 (binary_converter.cpp      : 111)   44430 reads written
+  0:00:00.532    63M / 63M   INFO    General                 (read_converter.cpp        :  81)   Converting single reads
+  0:00:00.560    67M / 67M   INFO    General                 (binary_converter.cpp      : 111)   888 reads written
+  0:00:00.561    67M / 67M   INFO    General                 (read_converter.cpp        :  87)   Converting merged reads
+  0:00:00.562    67M / 67M   INFO    General                 (binary_converter.cpp      : 111)   0 reads written
+  0:00:00.570    33M / 54M   INFO   StageManager             (stage.cpp                 : 166)   STAGE == de Bruijn graph construction
+  0:00:00.584    34M / 54M   INFO    General                 (construction.cpp          : 150)   Max read length 151
+  0:00:00.584    34M / 54M   INFO    General                 (construction.cpp          : 156)   Average read length 117.346
+  0:00:00.584    34M / 54M   INFO    General                 (stage.cpp                 : 113)   PROCEDURE == k+1-mer counting
+  0:00:00.585    34M / 54M   INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 1600 files using 40 threads. This might take a while.
+  0:00:00.587    35M / 54M   INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:00.587    35M / 54M   INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833311 Gb
+  0:00:00.587    35M / 54M   INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 41943
+  0:00:07.765    24G / 24G   INFO    General                 (kmer_splitters.hpp        : 287)   Processed 179496 reads
+  0:00:07.959   187M / 5G    INFO    General                 (kmer_splitters.hpp        : 293)   Used 179496 reads
+  0:00:07.961   187M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:10.651   190M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 3554654 kmers in total.
+  0:00:10.653   190M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:11.397   155M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Extension index construction
+  0:00:11.398   155M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:11.399   155M / 5G    INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 640 files using 40 threads. This might take a while.
+  0:00:11.400   155M / 5G    INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:11.401   155M / 5G    INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833286 Gb
+  0:00:11.401   155M / 5G    INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 104857
+  0:00:12.218    26G / 26G   INFO    General                 (kmer_splitters.hpp        : 364)   Processed 3554654 kmers
+  0:00:12.219    26G / 26G   INFO    General                 (kmer_splitters.hpp        : 369)   Used 3554654 kmers.
+  0:00:12.317   246M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:13.679   246M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 3577986 kmers in total.
+  0:00:13.681   246M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:13.833   246M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:13.938   194M / 5G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:00:14.053   194M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 1667552 bytes occupied (3.72847 bits per kmer).
+  0:00:14.059   194M / 5G    INFO   DeBruijnExtensionIndexBu (kmer_extension_index_build:  99)   Building k-mer extensions from k+1-mers
+  0:00:14.137   194M / 5G    INFO   DeBruijnExtensionIndexBu (kmer_extension_index_build: 103)   Building k-mer extensions from k+1-mers finished.
+  0:00:14.140   194M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Early tip clipping
+  0:00:14.140   194M / 5G    INFO    General                 (construction.cpp          : 293)   Early tip clipper length bound set as (RL - K)
+  0:00:14.141   194M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  28)   Early tip clipping
+  0:00:14.259   195M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  63)   #tipped junctions: 4133
+  0:00:14.270   195M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  74)   Clipped tips: 4195
+  0:00:14.277   195M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  30)   127040 22-mers were removed by early tip clipper
+  0:00:14.278   195M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Condensing graph
+  0:00:14.285   195M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 354)   Extracting unbranching paths
+  0:00:14.341   202M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 373)   Extracting unbranching paths finished. 36124 sequences extracted
+  0:00:14.397   202M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 309)   Collecting perfect loops
+  0:00:14.427   202M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 342)   Collecting perfect loops finished. 31 loops collected
+  0:00:14.721   205M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Filling coverage indices (PHM)
+  0:00:14.723   205M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:14.723   205M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:14.784   206M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 1669720 bytes occupied (3.75782 bits per kmer).
+  0:00:14.792   220M / 5G    INFO    General                 (construction.cpp          : 429)   Collecting k-mer coverage information from reads, this takes a while.
+  0:00:14.850   220M / 5G    INFO    General                 (construction.cpp          : 549)   Filling coverage and flanking coverage from PHM
+  0:00:14.881   220M / 5G    INFO    General                 (construction.cpp          : 505)   Processed 72252 edges
+  0:00:14.896   206M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Raw Simplification
+  0:00:14.897   206M / 5G    INFO    General                 (simplification.cpp        : 128)   PROCEDURE == InitialCleaning
+  0:00:14.898   206M / 5G    INFO    General                 (graph_simplification.hpp  : 671)   Flanking coverage based disconnection disabled
+  0:00:14.899   206M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Self conjugate edge remover
+  0:00:14.907   206M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Self conjugate edge remover triggered 0 times
+  0:00:14.908   206M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial tip clipper
+  0:00:14.925   206M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial tip clipper triggered 874 times
+  0:00:14.925   206M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial ec remover
+  0:00:14.953   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial ec remover triggered 1614 times
+  0:00:14.953   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial isolated edge remover
+  0:00:15.001   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial isolated edge remover triggered 18745 times
+  0:00:15.003   198M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Simplification
+  0:00:15.004   198M / 5G    INFO    General                 (simplification.cpp        : 383)   Graph simplification started
+  0:00:15.005   198M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:15.005   198M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 1
+  0:00:15.006   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:15.018   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 176 times
+  0:00:15.019   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:15.045   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 741 times
+  0:00:15.046   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:15.052   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:15.053   198M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 2
+  0:00:15.054   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:15.055   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 17 times
+  0:00:15.056   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:15.057   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:15.058   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:15.059   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 17 times
+  0:00:15.060   198M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 3
+  0:00:15.061   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:15.061   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:15.062   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:15.063   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:15.063   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:15.065   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 160 times
+  0:00:15.066   198M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 4
+  0:00:15.066   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:15.073   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 4 times
+  0:00:15.074   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:15.077   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:15.078   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:15.080   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:15.081   198M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 5
+  0:00:15.082   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:15.083   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:15.084   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:15.085   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:15.086   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:15.087   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:15.089   198M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Simplification Cleanup
+  0:00:15.090   198M / 5G    INFO    General                 (simplification.cpp        : 196)   PROCEDURE == Post simplification
+  0:00:15.091   198M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:15.091   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Relative coverage component remover
+  0:00:15.094   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Relative coverage component remover triggered 3 times
+  0:00:15.095   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Disconnecting edges with relatively low coverage
+  0:00:15.096   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Disconnecting edges with relatively low coverage triggered 0 times
+  0:00:15.097   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex tip clipper
+  0:00:15.103   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex tip clipper triggered 0 times
+  0:00:15.104   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex bulge remover
+  0:00:15.198   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex bulge remover triggered 0 times
+  0:00:15.199   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:15.201   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:15.202   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final tip clipper
+  0:00:15.203   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final tip clipper triggered 1 times
+  0:00:15.204   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:15.208   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:15.209   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Thorn remover (meta)
+  0:00:15.210   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Thorn remover (meta) triggered 0 times
+  0:00:15.211   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Relative coverage component remover
+  0:00:15.213   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Relative coverage component remover triggered 0 times
+  0:00:15.214   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Disconnecting edges with relatively low coverage
+  0:00:15.216   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Disconnecting edges with relatively low coverage triggered 0 times
+  0:00:15.217   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex tip clipper
+  0:00:15.219   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex tip clipper triggered 0 times
+  0:00:15.220   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex bulge remover
+  0:00:15.316   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex bulge remover triggered 0 times
+  0:00:15.317   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:15.319   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:15.320   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final tip clipper
+  0:00:15.322   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final tip clipper triggered 0 times
+  0:00:15.323   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:15.326   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:15.326   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Thorn remover (meta)
+  0:00:15.329   198M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Thorn remover (meta) triggered 0 times
+  0:00:15.330   198M / 5G    INFO    General                 (simplification.cpp        : 339)   Running Hidden EC remover (meta)
+  0:00:15.331   198M / 5G    INFO    General                 (simplification.cpp        : 343)   Disrupting self-conjugate edges
+  0:00:15.336   191M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Removing isolated edges
+  0:00:15.338   191M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Removing isolated edges triggered 213 times
+  0:00:15.339   191M / 5G    INFO    General                 (simplification.cpp        : 496)   Counting average coverage
+  0:00:15.341   191M / 5G    INFO    General                 (simplification.cpp        : 502)   Average coverage = 2.52715
+  0:00:15.342   191M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Contig Output
+  0:00:15.343   191M / 5G    INFO    General                 (read_converter.cpp        : 102)   Outputting contigs to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/simplified_contigs
+  0:00:15.348   191M / 5G    INFO    General                 (binary_converter.cpp      : 111)   7819 reads written
+  0:00:15.351   191M / 5G    INFO    General                 (pipeline.cpp              : 259)   SPAdes finished
+  0:00:15.363   191M / 5G    INFO    General                 (main.cpp                  : 107)   Assembling time: 0 hours 0 minutes 15 seconds
+
+===== K21 finished. 
+
+
+===== K33 started. 
+
+
+== Running: /hpc/software/spades/3.14.1/bin/spades-core /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/configs/config.info /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/configs/mda_mode.info /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/configs/meta_mode.info
+
+WARNING: Try to use logger before create one. Level=INFO. Message=Additional contigs is /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/simplified_contigs
+  0:00:00.000     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/configs/config.info
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/configs/mda_mode.info
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/configs/meta_mode.info
+  0:00:00.001     8M / 22M   INFO    General                 (memory_limit.cpp          :  49)   Memory limit set to 100 Gb
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  85)   Starting SPAdes, built from refs/heads/spades_3.14.1, git revision 0ace7b8b2f948f633d73db4a506c2d19303265ef
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  86)   Maximum k-mer length: 128
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  87)   Assembling dataset (/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/dataset.info) with K=33
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  88)   Maximum # of threads to use (adjusted due to OMP capabilities): 40
+  0:00:00.001     8M / 22M   INFO    General                 (pipeline.cpp              : 194)   SPAdes started
+  0:00:00.002     8M / 22M   INFO    General                 (pipeline.cpp              : 201)   Starting from stage: read_conversion
+  0:00:00.002     8M / 22M   INFO    General                 (pipeline.cpp              : 207)   Two-step RR enabled: 0
+  0:00:00.002     8M / 22M   INFO   StageManager             (stage.cpp                 : 166)   STAGE == Binary Read Conversion
+  0:00:00.003     8M / 22M   INFO    General                 (read_converter.cpp        :  53)   Binary reads detected
+  0:00:00.004     8M / 22M   INFO   StageManager             (stage.cpp                 : 166)   STAGE == de Bruijn graph construction
+  0:00:00.004     8M / 22M   INFO    General                 (construction.cpp          : 115)   Contigs from previous K will be used: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K21/simplified_contigs
+  0:00:00.013     9M / 22M   INFO    General                 (construction.cpp          : 150)   Max read length 151
+  0:00:00.013     9M / 22M   INFO    General                 (construction.cpp          : 156)   Average read length 117.346
+  0:00:00.013     9M / 22M   INFO    General                 (stage.cpp                 : 113)   PROCEDURE == k+1-mer counting
+  0:00:00.013     9M / 22M   INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 1600 files using 40 threads. This might take a while.
+  0:00:00.014    10M / 22M   INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:00.014    10M / 22M   INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833312 Gb
+  0:00:00.014    10M / 22M   INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 20971
+  0:00:03.232    24G / 24G   INFO    General                 (kmer_splitters.hpp        : 287)   Processed 195134 reads
+  0:00:03.420   273M / 5G    INFO    General                 (kmer_splitters.hpp        : 293)   Used 195134 reads
+  0:00:03.421   273M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:06.063   275M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 3260480 kmers in total.
+  0:00:06.080   275M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:06.445   238M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Extension index construction
+  0:00:06.446   238M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:06.446   238M / 5G    INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 640 files using 40 threads. This might take a while.
+  0:00:06.447   238M / 5G    INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:06.448   238M / 5G    INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.83328 Gb
+  0:00:06.448   238M / 5G    INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 52428
+  0:00:08.298    26G / 26G   INFO    General                 (kmer_splitters.hpp        : 364)   Processed 3260480 kmers
+  0:00:08.299    26G / 26G   INFO    General                 (kmer_splitters.hpp        : 369)   Used 3260480 kmers.
+  0:00:08.411   210M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:09.559   186M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 3285762 kmers in total.
+  0:00:09.560   186M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:09.920   186M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:10.027   132M / 5G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:00:10.135   132M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 1531992 bytes occupied (3.73001 bits per kmer).
+  0:00:10.141   132M / 5G    INFO   DeBruijnExtensionIndexBu (kmer_extension_index_build:  99)   Building k-mer extensions from k+1-mers
+  0:00:10.212   132M / 5G    INFO   DeBruijnExtensionIndexBu (kmer_extension_index_build: 103)   Building k-mer extensions from k+1-mers finished.
+  0:00:10.218   132M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Early tip clipping
+  0:00:10.219   132M / 5G    INFO    General                 (construction.cpp          : 293)   Early tip clipper length bound set as (RL - K)
+  0:00:10.219   132M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  28)   Early tip clipping
+  0:00:10.711   133M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  63)   #tipped junctions: 3912
+  0:00:10.726   133M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  74)   Clipped tips: 3948
+  0:00:10.733   133M / 5G    INFO   Early tip clipping       (early_simplification.hpp  :  30)   108133 34-mers were removed by early tip clipper
+  0:00:10.734   133M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Condensing graph
+  0:00:10.741   133M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 354)   Extracting unbranching paths
+  0:00:10.794   121M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 373)   Extracting unbranching paths finished. 33431 sequences extracted
+  0:00:10.832   121M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 309)   Collecting perfect loops
+  0:00:10.851   121M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 342)   Collecting perfect loops finished. 18 loops collected
+  0:00:11.138   128M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Filling coverage indices (PHM)
+  0:00:11.139   128M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:11.140   128M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:11.193   134M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 1533168 bytes occupied (3.76182 bits per kmer).
+  0:00:11.200   148M / 5G    INFO    General                 (construction.cpp          : 429)   Collecting k-mer coverage information from reads, this takes a while.
+  0:00:11.245   148M / 5G    INFO    General                 (construction.cpp          : 549)   Filling coverage and flanking coverage from PHM
+  0:00:11.274   148M / 5G    INFO    General                 (construction.cpp          : 505)   Processed 66893 edges
+  0:00:11.292   128M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Raw Simplification
+  0:00:11.293   128M / 5G    INFO    General                 (simplification.cpp        : 128)   PROCEDURE == InitialCleaning
+  0:00:11.294   128M / 5G    INFO    General                 (graph_simplification.hpp  : 671)   Flanking coverage based disconnection disabled
+  0:00:11.295   128M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Self conjugate edge remover
+  0:00:11.298   128M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Self conjugate edge remover triggered 1 times
+  0:00:11.299   128M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial tip clipper
+  0:00:11.312   128M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial tip clipper triggered 998 times
+  0:00:11.313   128M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial ec remover
+  0:00:11.332   128M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial ec remover triggered 920 times
+  0:00:11.333   128M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial isolated edge remover
+  0:00:11.372   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial isolated edge remover triggered 20416 times
+  0:00:11.373   125M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Simplification
+  0:00:11.374   125M / 5G    INFO    General                 (simplification.cpp        : 383)   Graph simplification started
+  0:00:11.375   125M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:11.375   125M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 1
+  0:00:11.376   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:11.378   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 81 times
+  0:00:11.379   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:11.389   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 405 times
+  0:00:11.390   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:11.391   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:11.392   125M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 2
+  0:00:11.393   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:11.394   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 4 times
+  0:00:11.395   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:11.396   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:11.397   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:11.398   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 12 times
+  0:00:11.399   125M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 3
+  0:00:11.399   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:11.400   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:11.401   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:11.401   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:11.402   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:11.403   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 82 times
+  0:00:11.404   125M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 4
+  0:00:11.404   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:11.406   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:11.407   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:11.409   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:11.410   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:11.412   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:11.413   125M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Simplification Cleanup
+  0:00:11.414   125M / 5G    INFO    General                 (simplification.cpp        : 196)   PROCEDURE == Post simplification
+  0:00:11.415   125M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:11.416   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Relative coverage component remover
+  0:00:11.418   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Relative coverage component remover triggered 3 times
+  0:00:11.419   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Disconnecting edges with relatively low coverage
+  0:00:11.421   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Disconnecting edges with relatively low coverage triggered 0 times
+  0:00:11.421   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex tip clipper
+  0:00:11.427   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex tip clipper triggered 0 times
+  0:00:11.428   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex bulge remover
+  0:00:11.509   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex bulge remover triggered 0 times
+  0:00:11.510   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:11.511   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:11.512   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final tip clipper
+  0:00:11.514   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final tip clipper triggered 1 times
+  0:00:11.515   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:11.517   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:11.518   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Thorn remover (meta)
+  0:00:11.520   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Thorn remover (meta) triggered 0 times
+  0:00:11.521   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Relative coverage component remover
+  0:00:11.522   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Relative coverage component remover triggered 0 times
+  0:00:11.523   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Disconnecting edges with relatively low coverage
+  0:00:11.525   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Disconnecting edges with relatively low coverage triggered 0 times
+  0:00:11.526   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex tip clipper
+  0:00:11.528   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex tip clipper triggered 0 times
+  0:00:11.529   125M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex bulge remover
+  0:00:11.609   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex bulge remover triggered 0 times
+  0:00:11.610   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:11.612   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:11.613   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final tip clipper
+  0:00:11.614   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final tip clipper triggered 0 times
+  0:00:11.615   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:11.618   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:11.619   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Thorn remover (meta)
+  0:00:11.620   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Thorn remover (meta) triggered 0 times
+  0:00:11.621   119M / 5G    INFO    General                 (simplification.cpp        : 339)   Running Hidden EC remover (meta)
+  0:00:11.623   119M / 5G    INFO    General                 (simplification.cpp        : 343)   Disrupting self-conjugate edges
+  0:00:11.626   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Removing isolated edges
+  0:00:11.628   119M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Removing isolated edges triggered 130 times
+  0:00:11.629   119M / 5G    INFO    General                 (simplification.cpp        : 496)   Counting average coverage
+  0:00:11.631   119M / 5G    INFO    General                 (simplification.cpp        : 502)   Average coverage = 2.34533
+  0:00:11.632   119M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Contig Output
+  0:00:11.633   119M / 5G    INFO    General                 (read_converter.cpp        : 102)   Outputting contigs to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/simplified_contigs
+  0:00:11.640   123M / 5G    INFO    General                 (binary_converter.cpp      : 111)   6657 reads written
+  0:00:11.643   122M / 5G    INFO    General                 (pipeline.cpp              : 259)   SPAdes finished
+  0:00:11.654   122M / 5G    INFO    General                 (main.cpp                  : 107)   Assembling time: 0 hours 0 minutes 11 seconds
+
+===== K33 finished. 
+
+
+===== K55 started. 
+
+
+== Running: /hpc/software/spades/3.14.1/bin/spades-core /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/configs/config.info /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/configs/mda_mode.info /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/configs/meta_mode.info
+
+WARNING: Try to use logger before create one. Level=INFO. Message=Additional contigs is /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/simplified_contigs
+  0:00:00.000     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/configs/config.info
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/configs/mda_mode.info
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  75)   Loaded config from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/configs/meta_mode.info
+  0:00:00.001     8M / 22M   INFO    General                 (memory_limit.cpp          :  49)   Memory limit set to 100 Gb
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  85)   Starting SPAdes, built from refs/heads/spades_3.14.1, git revision 0ace7b8b2f948f633d73db4a506c2d19303265ef
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  86)   Maximum k-mer length: 128
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  87)   Assembling dataset (/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/dataset.info) with K=55
+  0:00:00.001     8M / 22M   INFO    General                 (main.cpp                  :  88)   Maximum # of threads to use (adjusted due to OMP capabilities): 40
+  0:00:00.002     8M / 22M   INFO    General                 (pipeline.cpp              : 194)   SPAdes started
+  0:00:00.002     8M / 22M   INFO    General                 (pipeline.cpp              : 201)   Starting from stage: read_conversion
+  0:00:00.002     8M / 22M   INFO    General                 (pipeline.cpp              : 207)   Two-step RR enabled: 1
+  0:00:00.002     8M / 22M   INFO    General                 (pipeline.cpp              : 218)   Will need read mapping, kmer mapper will be attached
+  0:00:00.002     8M / 22M   INFO   StageManager             (stage.cpp                 : 166)   STAGE == Binary Read Conversion
+  0:00:00.004     8M / 22M   INFO    General                 (read_converter.cpp        :  53)   Binary reads detected
+  0:00:00.004     8M / 22M   INFO   StageManager             (stage.cpp                 : 166)   STAGE == de Bruijn graph construction
+  0:00:00.004     8M / 22M   INFO    General                 (construction.cpp          : 115)   Contigs from previous K will be used: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K33/simplified_contigs
+  0:00:00.013     9M / 22M   INFO    General                 (construction.cpp          : 150)   Max read length 151
+  0:00:00.013     9M / 22M   INFO    General                 (construction.cpp          : 156)   Average read length 117.346
+  0:00:00.013     9M / 22M   INFO    General                 (stage.cpp                 : 113)   PROCEDURE == k+1-mer counting
+  0:00:00.014     9M / 22M   INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 1600 files using 40 threads. This might take a while.
+  0:00:00.015    10M / 22M   INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:00.015    10M / 22M   INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833312 Gb
+  0:00:00.015    10M / 22M   INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 20971
+  0:00:04.229    24G / 24G   INFO    General                 (kmer_splitters.hpp        : 287)   Processed 192810 reads
+  0:00:04.416   273M / 5G    INFO    General                 (kmer_splitters.hpp        : 293)   Used 192810 reads
+  0:00:04.417   273M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:07.522   275M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 2670860 kmers in total.
+  0:00:07.537   275M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:08.272   217M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Extension index construction
+  0:00:08.273   217M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:08.273   217M / 5G    INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 640 files using 40 threads. This might take a while.
+  0:00:08.274   217M / 5G    INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:08.275   217M / 5G    INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833279 Gb
+  0:00:08.275   217M / 5G    INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 52428
+  0:00:10.935    26G / 26G   INFO    General                 (kmer_splitters.hpp        : 364)   Processed 2670860 kmers
+  0:00:10.938    26G / 26G   INFO    General                 (kmer_splitters.hpp        : 369)   Used 2670860 kmers.
+  0:00:11.064   240M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:12.613   240M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 2698216 kmers in total.
+  0:00:12.615   240M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:12.855   240M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:12.945   184M / 5G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:00:13.054   184M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 1259664 bytes occupied (3.73481 bits per kmer).
+  0:00:13.059   184M / 5G    INFO   DeBruijnExtensionIndexBu (kmer_extension_index_build:  99)   Building k-mer extensions from k+1-mers
+  0:00:13.128   184M / 5G    INFO   DeBruijnExtensionIndexBu (kmer_extension_index_build: 103)   Building k-mer extensions from k+1-mers finished.
+  0:00:13.130   177M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Condensing graph
+  0:00:13.138   177M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 354)   Extracting unbranching paths
+  0:00:13.485   179M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 373)   Extracting unbranching paths finished. 38013 sequences extracted
+  0:00:13.530   179M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 309)   Collecting perfect loops
+  0:00:13.551   179M / 5G    INFO   UnbranchingPathExtractor (debruijn_graph_constructor: 342)   Collecting perfect loops finished. 1 loops collected
+  0:00:13.905   189M / 5G    INFO    General                 (stage.cpp                 : 113)   PROCEDURE == Filling coverage indices (PHM)
+  0:00:13.906   189M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:13.906   189M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:13.958   190M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 1259992 bytes occupied (3.77404 bits per kmer).
+  0:00:13.967   202M / 5G    INFO    General                 (construction.cpp          : 429)   Collecting k-mer coverage information from reads, this takes a while.
+  0:00:14.010   202M / 5G    INFO    General                 (construction.cpp          : 549)   Filling coverage and flanking coverage from PHM
+  0:00:14.050   202M / 5G    INFO    General                 (construction.cpp          : 505)   Processed 76027 edges
+  0:00:14.068   190M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Gap Closer
+  0:00:14.069   190M / 5G    INFO    General                 (graph_pack.hpp            : 105)   Index refill
+  0:00:14.070   190M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:14.071   190M / 5G    INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 640 files using 40 threads. This might take a while.
+  0:00:14.072   184M / 5G    INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:14.074   184M / 5G    INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833076 Gb
+  0:00:14.074   184M / 5G    INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 52428
+  0:00:16.732    26G / 26G   INFO    General                 (edge_index_builders.hpp   :  77)   Processed 76027 edges
+  0:00:16.735    26G / 26G   INFO    General                 (edge_index_builders.hpp   :  82)   Used 76027 sequences.
+  0:00:16.830   228M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:18.094   228M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 2670860 kmers in total.
+  0:00:18.099   228M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:18.293   228M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:18.374   213M / 5G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:00:18.505   213M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 1246848 bytes occupied (3.73467 bits per kmer).
+  0:00:18.529   261M / 5G    INFO    General                 (edge_index_builders.hpp   : 107)   Collecting edge information from graph, this takes a while.
+  0:00:18.574   255M / 5G    INFO    General                 (edge_index.hpp            :  92)   Index refilled
+  0:00:18.578   255M / 5G    INFO    General                 (gap_closer.cpp            : 147)   Preparing shift maps
+  0:00:18.623   256M / 5G    INFO    General                 (gap_closer.cpp            : 107)   Processing paired reads (takes a while)
+  0:00:18.646   255M / 5G    INFO    General                 (gap_closer.cpp            : 126)   Used 44430 paired reads
+  0:00:18.648   255M / 5G    INFO    General                 (gap_closer.cpp            : 128)   Merging paired indices
+  0:00:18.696   257M / 5G    INFO   GapCloser                (gap_closer.cpp            : 332)   Closing short gaps
+  0:00:18.768   250M / 5G    INFO   GapCloser                (gap_closer.cpp            : 366)   Closing short gaps complete: filled 85 gaps after checking 6097 candidates
+  0:00:18.804   250M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Raw Simplification
+  0:00:18.809   202M / 5G    INFO    General                 (simplification.cpp        : 128)   PROCEDURE == InitialCleaning
+  0:00:18.810   202M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Self conjugate edge remover
+  0:00:18.818   202M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Self conjugate edge remover triggered 1 times
+  0:00:18.819   202M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial tip clipper
+  0:00:18.847   201M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial tip clipper triggered 2360 times
+  0:00:18.848   201M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial ec remover
+  0:00:18.856   201M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial ec remover triggered 160 times
+  0:00:18.857   201M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Disconnecting edges with low flanking coverage
+  0:00:18.870   201M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Disconnecting edges with low flanking coverage triggered 393 times
+  0:00:18.871   201M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Initial isolated edge remover
+  0:00:18.923   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Initial isolated edge remover triggered 22521 times
+  0:00:18.924   194M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Preliminary Simplification
+  0:00:18.925   194M / 5G    INFO    General                 (simplification.cpp        : 383)   Graph simplification started
+  0:00:18.926   194M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:18.927   194M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 1
+  0:00:18.927   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:18.944   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 1673 times
+  0:00:18.945   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:18.957   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 38 times
+  0:00:18.958   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:18.962   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:18.963   194M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 2
+  0:00:18.964   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:18.965   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 2 times
+  0:00:18.966   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:18.967   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:18.968   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:18.971   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 179 times
+  0:00:18.972   194M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 3
+  0:00:18.972   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:18.973   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 3 times
+  0:00:18.974   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:18.975   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 2 times
+  0:00:18.976   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:18.977   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 32 times
+  0:00:18.977   194M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 4
+  0:00:18.978   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:18.985   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:18.986   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:18.994   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:18.995   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:18.996   194M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:18.998   194M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Gap Closer
+  0:00:18.999   194M / 5G    INFO    General                 (graph_pack.hpp            : 105)   Index refill
+  0:00:19.000   194M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:19.001   194M / 5G    INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 640 files using 40 threads. This might take a while.
+  0:00:19.003   194M / 5G    INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:19.004   194M / 5G    INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833133 Gb
+  0:00:19.005   194M / 5G    INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 52428
+  0:00:21.024    26G / 26G   INFO    General                 (edge_index_builders.hpp   :  77)   Processed 11558 edges
+  0:00:21.035    26G / 26G   INFO    General                 (edge_index_builders.hpp   :  82)   Used 11558 sequences.
+  0:00:21.098   241M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:22.322   241M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 1184740 kmers in total.
+  0:00:22.326   241M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:22.582   241M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:22.631   241M / 5G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:00:22.715   241M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 557864 bytes occupied (3.767 bits per kmer).
+  0:00:22.728   261M / 5G    INFO    General                 (edge_index_builders.hpp   : 107)   Collecting edge information from graph, this takes a while.
+  0:00:22.760   261M / 5G    INFO    General                 (edge_index.hpp            :  92)   Index refilled
+  0:00:22.764   261M / 5G    INFO    General                 (gap_closer.cpp            : 147)   Preparing shift maps
+  0:00:22.774   261M / 5G    INFO    General                 (gap_closer.cpp            : 107)   Processing paired reads (takes a while)
+  0:00:22.818   258M / 5G    INFO    General                 (gap_closer.cpp            : 126)   Used 44430 paired reads
+  0:00:22.819   258M / 5G    INFO    General                 (gap_closer.cpp            : 128)   Merging paired indices
+  0:00:22.834   254M / 5G    INFO   GapCloser                (gap_closer.cpp            : 332)   Closing short gaps
+  0:00:22.840   254M / 5G    INFO   GapCloser                (gap_closer.cpp            : 366)   Closing short gaps complete: filled 3 gaps after checking 188 candidates
+  0:00:22.845   248M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Preliminary Paired Information Counting
+  0:00:22.870   248M / 5G    INFO    General                 (graph_pack.hpp            : 113)   Normalizing k-mer map. Total 4982 kmers to process
+  0:00:22.872   248M / 5G    INFO    General                 (graph_pack.hpp            : 115)   Normalizing done
+  0:00:22.873   248M / 5G    INFO    General                 (pair_info_count.cpp       : 322)   Min edge length for estimation: 900
+  0:00:22.874   248M / 5G    INFO    General                 (pair_info_count.cpp       : 333)   Estimating insert size for library #0
+  0:00:22.875   248M / 5G    INFO    General                 (pair_info_count.cpp       : 190)   Estimating insert size (takes a while)
+  0:00:23.293   897M / 5G    INFO    General                 (pair_info_count.cpp       :  39)   Selecting usual mapper
+  0:00:24.144   897M / 5G    INFO    General                 (sequence_mapper_notifier.h:  94)   Total 44430 reads processed
+  0:00:25.378   897M / 5G    INFO    General                 (pair_info_count.cpp       : 208)   Edge pairs: 8278
+  0:00:25.380   897M / 5G    INFO    General                 (pair_info_count.cpp       : 212)   114 paired reads (0.256583% of all) aligned to long edges
+  0:00:25.460   241M / 5G    INFO    General                 (pair_info_count.cpp       : 356)     Insert size = 198.614, deviation = 81.9841, left quantile = 92, right quantile = 310, read length = 151
+  0:00:25.462   241M / 5G    INFO    General                 (pair_info_count.cpp       : 373)   Filtering data for library #0
+  0:00:25.465   241M / 5G    INFO    General                 (pair_info_count.cpp       :  39)   Selecting usual mapper
+  0:00:25.515   241M / 5G    INFO    General                 (sequence_mapper_notifier.h:  94)   Total 44430 reads processed
+  0:00:25.517   241M / 5G    INFO    General                 (pair_info_count.cpp       : 385)   Mapping library #0
+  0:00:25.518   241M / 5G    INFO    General                 (pair_info_count.cpp       : 387)   Mapping paired reads (takes a while)
+  0:00:25.519   241M / 5G    INFO    General                 (pair_info_count.cpp       : 288)   Left insert size quantile 92, right insert size quantile 310, filtering threshold 1, rounding threshold 0
+  0:00:25.529   241M / 5G    INFO    General                 (pair_info_count.cpp       :  39)   Selecting usual mapper
+  0:00:25.571   240M / 5G    INFO    General                 (sequence_mapper_notifier.h:  94)   Total 44430 reads processed
+  0:00:25.578   199M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Preliminary Distance Estimation
+  0:00:25.579   199M / 5G    INFO    General                 (distance_estimation.cpp   : 174)   Processing library #0
+  0:00:25.580   199M / 5G    INFO    General                 (distance_estimation.cpp   : 150)   Weight Filter Done
+  0:00:25.581   199M / 5G    INFO   DistanceEstimator        (distance_estimation.hpp   : 116)   Using SIMPLE distance estimator
+  0:00:25.596   194M / 5G    INFO    General                 (distance_estimation.cpp   :  35)   Filtering info
+  0:00:25.596   194M / 5G    INFO    General                 (pair_info_filters.hpp     : 242)   Start filtering; index size: 11912
+  0:00:25.603   187M / 5G    INFO    General                 (pair_info_filters.hpp     : 263)   Done filtering
+  0:00:25.603   187M / 5G    INFO    General                 (distance_estimation.cpp   : 157)   Refining clustered pair information
+  0:00:25.605   187M / 5G    INFO    General                 (distance_estimation.cpp   : 159)   The refining of clustered pair information has been finished
+  0:00:25.606   187M / 5G    INFO    General                 (distance_estimation.cpp   : 161)   Improving paired information
+  0:00:25.631   187M / 5G    INFO   PairInfoImprover         (pair_info_improver.hpp    : 103)   Paired info stats: missing = 0; contradictional = 0
+  0:00:25.654   187M / 5G    INFO   PairInfoImprover         (pair_info_improver.hpp    : 103)   Paired info stats: missing = 0; contradictional = 0
+  0:00:25.655   187M / 5G    INFO    General                 (distance_estimation.cpp   : 104)   Filling scaffolding index
+  0:00:25.656   187M / 5G    INFO   DistanceEstimator        (distance_estimation.hpp   : 116)   Using SMOOTHING distance estimator
+  0:00:25.662   188M / 5G    INFO    General                 (distance_estimation.cpp   :  35)   Filtering info
+  0:00:25.663   188M / 5G    INFO    General                 (pair_info_filters.hpp     : 242)   Start filtering; index size: 11576
+  0:00:25.667   188M / 5G    INFO    General                 (pair_info_filters.hpp     : 263)   Done filtering
+  0:00:25.668   188M / 5G    INFO    General                 (distance_estimation.cpp   : 183)   Clearing raw paired index
+  0:00:25.671   179M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Preliminary Repeat Resolving
+  0:00:25.672   179M / 5G    INFO    General                 (repeat_resolving.cpp      :  56)   Setting up preliminary path extend settings
+  0:00:25.673   179M / 5G    INFO    General                 (repeat_resolving.cpp      :  69)   Using Path-Extend repeat resolving
+  0:00:25.673   179M / 5G    INFO    General                 (launcher.cpp              : 538)   ExSPAnder repeat resolving tool started
+  0:00:25.702   195M / 5G    INFO    General                 (launcher.cpp              : 404)   Creating main extenders, unique edge length = 2000
+  0:00:25.707   195M / 5G    INFO    General                 (extenders_logic.cpp       : 519)   Using 1 paired-end library
+  0:00:25.708   195M / 5G    INFO    General                 (extenders_logic.cpp       : 520)   Using 1 paired-end scaffolding library
+  0:00:25.708   195M / 5G    INFO    General                 (extenders_logic.cpp       : 521)   Using 0 single read libraries
+  0:00:25.709   195M / 5G    INFO    General                 (launcher.cpp              : 432)   Total number of extenders is 3
+  0:00:25.710   195M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 0 paths from 5765 (0%)
+  0:00:25.715   195M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 128 paths from 5765 (2%)
+  0:00:25.721   196M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 256 paths from 5765 (4%)
+  0:00:25.732   198M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 512 paths from 5765 (8%)
+  0:00:25.735   198M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 577 paths from 5765 (10%)
+  0:00:25.752   202M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 1024 paths from 5765 (17%)
+  0:00:25.758   203M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 1154 paths from 5765 (20%)
+  0:00:25.780   208M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 1731 paths from 5765 (30%)
+  0:00:25.792   210M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 2048 paths from 5765 (35%)
+  0:00:25.802   212M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 2308 paths from 5765 (40%)
+  0:00:25.823   217M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 2885 paths from 5765 (50%)
+  0:00:25.843   222M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 3462 paths from 5765 (60%)
+  0:00:25.864   226M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 4039 paths from 5765 (70%)
+  0:00:25.866   227M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 4096 paths from 5765 (71%)
+  0:00:25.885   231M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 4616 paths from 5765 (80%)
+  0:00:25.907   236M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 5193 paths from 5765 (90%)
+  0:00:25.931   240M / 5G    INFO    General                 (launcher.cpp              : 244)   Finalizing paths
+  0:00:25.932   240M / 5G    INFO    General                 (launcher.cpp              : 246)   Deduplicating paths
+  0:00:25.943   240M / 5G    INFO    General                 (launcher.cpp              : 250)   Paths deduplicated
+  0:00:25.943   240M / 5G    INFO    General                 (launcher.cpp              : 257)   Overlaps will not be removed
+  0:00:25.950   240M / 5G    INFO    General                 (launcher.cpp              : 267)   Paths finalized
+  0:00:25.950   240M / 5G    INFO    General                 (launcher.cpp              : 439)   Closing gaps in paths
+  0:00:25.971   241M / 5G    INFO    General                 (launcher.cpp              : 467)   Gap closing completed
+  0:00:25.977   241M / 5G    INFO    General                 (launcher.cpp              : 296)   Traversing tandem repeats
+  0:00:25.999   242M / 5G    INFO    General                 (launcher.cpp              : 306)   Traversed 0 loops
+  0:00:26.000   242M / 5G    INFO    General                 (launcher.cpp              : 244)   Finalizing paths
+  0:00:26.001   242M / 5G    INFO    General                 (launcher.cpp              : 246)   Deduplicating paths
+  0:00:26.003   242M / 5G    INFO    General                 (launcher.cpp              : 250)   Paths deduplicated
+  0:00:26.004   242M / 5G    INFO    General                 (launcher.cpp              : 257)   Overlaps will not be removed
+  0:00:26.008   242M / 5G    INFO    General                 (launcher.cpp              : 267)   Paths finalized
+  0:00:26.009   242M / 5G    INFO    General                 (launcher.cpp              : 596)   ExSPAnder repeat resolving tool finished
+  0:00:26.022   242M / 5G    INFO    General                 (repeat_resolving.cpp      :  75)   Restoring initial path extend settings
+  0:00:26.023   242M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Contig Output
+  0:00:26.024   242M / 5G    INFO    General                 (contig_output_stage.cpp   : 146)   Writing GFA graph to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/strain_graph.gfa
+  0:00:26.048   242M / 5G    INFO    General                 (contig_output_stage.cpp   : 190)   Breaking scaffolds
+  0:00:26.088   235M / 5G    INFO    General                 (contig_output_stage.cpp   :  95)   Outputting contigs to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/final_contigs.fasta
+  0:00:26.111   235M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Second Phase Setup
+  0:00:26.112   235M / 5G    INFO    General                 (second_phase_setup.cpp    :  17)   Preparing second phase
+  0:00:26.121   235M / 5G    INFO    General                 (second_phase_setup.cpp    :  28)   Moving preliminary contigs from /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/final_contigs.fasta to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/first_pe_contigs.fasta
+  0:00:26.122   235M / 5G    INFO    General                 (second_phase_setup.cpp    :  40)   Ready to run second phase
+  0:00:26.123   235M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Simplification
+  0:00:26.125   215M / 5G    INFO    General                 (simplification.cpp        : 383)   Graph simplification started
+  0:00:26.126   215M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:26.127   215M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 1
+  0:00:26.127   215M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:26.134   215M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:26.135   215M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:26.146   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 20 times
+  0:00:26.148   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:26.155   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:26.156   208M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 2
+  0:00:26.157   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:26.158   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:26.159   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:26.160   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:26.161   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:26.162   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:26.163   208M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 3
+  0:00:26.163   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:26.164   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:26.165   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:26.165   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:26.166   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:26.167   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:26.167   208M / 5G    INFO    General                 (simplification.cpp        : 388)   PROCEDURE == Simplification cycle, iteration 4
+  0:00:26.168   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:26.175   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:26.176   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:26.178   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:26.179   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Low coverage edge remover
+  0:00:26.180   208M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Low coverage edge remover triggered 0 times
+  0:00:26.182   208M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Gap Closer
+  0:00:26.183   208M / 5G    INFO    General                 (graph_pack.hpp            : 105)   Index refill
+  0:00:26.185   208M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 301)   Building kmer index
+  0:00:26.186   208M / 5G    INFO    General                 (kmer_index_builder.hpp    : 117)   Splitting kmer instances into 640 files using 40 threads. This might take a while.
+  0:00:26.188   208M / 5G    INFO    General                 (file_limit.hpp            :  32)   Open file limit set to 131072
+  0:00:26.189   208M / 5G    INFO    General                 (kmer_splitters.hpp        :  89)   Memory available for splitting buffers: 0.833126 Gb
+  0:00:26.190   208M / 5G    INFO    General                 (kmer_splitters.hpp        :  97)   Using cell size of 52428
+  0:00:29.667    26G / 26G   INFO    General                 (edge_index_builders.hpp   :  77)   Processed 11432 edges
+  0:00:29.669    26G / 26G   INFO    General                 (edge_index_builders.hpp   :  82)   Used 11432 sequences.
+  0:00:29.746   185M / 5G    INFO    General                 (kmer_index_builder.hpp    : 120)   Starting k-mer counting.
+  0:00:31.215   185M / 5G    INFO    General                 (kmer_index_builder.hpp    : 127)   K-mer counting done. There are 1183409 kmers in total.
+  0:00:31.219   185M / 5G    INFO    General                 (kmer_index_builder.hpp    : 133)   Merging temporary buckets.
+  0:00:31.430   185M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 314)   Building perfect hash indices
+  0:00:31.485   155M / 5G    INFO    General                 (kmer_index_builder.hpp    : 150)   Merging final buckets.
+  0:00:31.567   155M / 5G    INFO   K-mer Index Building     (kmer_index_builder.hpp    : 336)   Index built. Total 557240 bytes occupied (3.76702 bits per kmer).
+  0:00:31.581   175M / 5G    INFO    General                 (edge_index_builders.hpp   : 107)   Collecting edge information from graph, this takes a while.
+  0:00:31.609   173M / 5G    INFO    General                 (edge_index.hpp            :  92)   Index refilled
+  0:00:31.612   173M / 5G    INFO    General                 (gap_closer.cpp            : 147)   Preparing shift maps
+  0:00:31.619   173M / 5G    INFO    General                 (gap_closer.cpp            : 107)   Processing paired reads (takes a while)
+  0:00:31.684   172M / 5G    INFO    General                 (gap_closer.cpp            : 126)   Used 44430 paired reads
+  0:00:31.686   172M / 5G    INFO    General                 (gap_closer.cpp            : 128)   Merging paired indices
+  0:00:31.705   166M / 5G    INFO   GapCloser                (gap_closer.cpp            : 332)   Closing short gaps
+  0:00:31.712   166M / 5G    INFO   GapCloser                (gap_closer.cpp            : 366)   Closing short gaps complete: filled 0 gaps after checking 151 candidates
+  0:00:31.722   166M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Simplification Cleanup
+  0:00:31.723   166M / 5G    INFO    General                 (simplification.cpp        : 196)   PROCEDURE == Post simplification
+  0:00:31.724   166M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:31.725   166M / 5G    INFO    General                 (graph_simplification.hpp  : 643)   Creating parallel br instance
+  0:00:31.726   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Relative coverage component remover
+  0:00:31.733   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Relative coverage component remover triggered 0 times
+  0:00:31.734   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Disconnecting edges with relatively low coverage
+  0:00:31.743   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Disconnecting edges with relatively low coverage triggered 0 times
+  0:00:31.744   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex tip clipper
+  0:00:31.754   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex tip clipper triggered 0 times
+  0:00:31.755   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex bulge remover
+  0:00:31.824   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex bulge remover triggered 0 times
+  0:00:31.825   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:31.829   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:31.830   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final tip clipper
+  0:00:31.832   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final tip clipper triggered 1 times
+  0:00:31.833   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:31.836   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:31.837   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final bulge remover
+  0:00:31.839   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final bulge remover triggered 0 times
+  0:00:31.840   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Thorn remover (meta)
+  0:00:31.842   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Thorn remover (meta) triggered 0 times
+  0:00:31.843   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Relative coverage component remover
+  0:00:31.849   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Relative coverage component remover triggered 0 times
+  0:00:31.850   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Disconnecting edges with relatively low coverage
+  0:00:31.854   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Disconnecting edges with relatively low coverage triggered 0 times
+  0:00:31.855   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex tip clipper
+  0:00:31.859   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex tip clipper triggered 0 times
+  0:00:31.860   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Complex bulge remover
+  0:00:31.933   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Complex bulge remover triggered 0 times
+  0:00:31.934   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Tip clipper
+  0:00:31.936   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Tip clipper triggered 0 times
+  0:00:31.937   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final tip clipper
+  0:00:31.938   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final tip clipper triggered 0 times
+  0:00:31.939   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Bulge remover
+  0:00:31.941   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Bulge remover triggered 0 times
+  0:00:31.942   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Final bulge remover
+  0:00:31.944   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Final bulge remover triggered 0 times
+  0:00:31.945   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Thorn remover (meta)
+  0:00:31.946   166M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Thorn remover (meta) triggered 0 times
+  0:00:31.947   166M / 5G    INFO    General                 (simplification.cpp        : 339)   Running Hidden EC remover (meta)
+  0:00:31.949   166M / 5G    INFO    General                 (simplification.cpp        : 343)   Disrupting self-conjugate edges
+  0:00:31.953   162M / 5G    INFO   Simplification           (parallel_processing.hpp   : 165)   Running Removing isolated edges
+  0:00:31.990   161M / 5G    INFO   Simplification           (parallel_processing.hpp   : 167)   Removing isolated edges triggered 706 times
+  0:00:31.991   161M / 5G    INFO    General                 (simplification.cpp        : 496)   Counting average coverage
+  0:00:31.993   161M / 5G    INFO    General                 (simplification.cpp        : 502)   Average coverage = 1.97586
+  0:00:31.993   161M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Mismatch Correction
+  0:00:31.994   161M / 5G    INFO    General                 (graph_pack.hpp            : 113)   Normalizing k-mer map. Total 7808 kmers to process
+  0:00:32.001   161M / 5G    INFO    General                 (graph_pack.hpp            : 115)   Normalizing done
+  0:00:32.087   161M / 5G    INFO    General                 (mismatch_shall_not_pass.hp: 195)   Finished collecting potential mismatches positions
+  0:00:32.094   161M / 5G    INFO    General                 (mismatch_shall_not_pass.hp: 310)   All edges processed
+  0:00:32.095   161M / 5G    INFO    General                 (mismatch_correction.cpp   :  27)   Corrected 0 nucleotides
+  0:00:32.097   161M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Contig Output
+  0:00:32.097   161M / 5G    INFO    General                 (contig_output.hpp         :  21)   Outputting contigs to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/before_rr.fasta
+  0:00:32.132   161M / 5G    INFO    General                 (contig_output_stage.cpp   : 146)   Writing GFA graph to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/assembly_graph_after_simplification.gfa
+  0:00:32.153   161M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Paired Information Counting
+  0:00:32.175   160M / 5G    INFO    General                 (graph_pack.hpp            : 113)   Normalizing k-mer map. Total 7808 kmers to process
+  0:00:32.176   160M / 5G    INFO    General                 (graph_pack.hpp            : 115)   Normalizing done
+  0:00:32.177   160M / 5G    INFO    General                 (pair_info_count.cpp       : 322)   Min edge length for estimation: 900
+  0:00:32.177   160M / 5G    INFO    General                 (pair_info_count.cpp       : 333)   Estimating insert size for library #0
+  0:00:32.178   160M / 5G    INFO    General                 (pair_info_count.cpp       : 190)   Estimating insert size (takes a while)
+  0:00:32.599   816M / 5G    INFO    General                 (pair_info_count.cpp       :  39)   Selecting usual mapper
+  0:00:33.454   816M / 5G    INFO    General                 (sequence_mapper_notifier.h:  94)   Total 44430 reads processed
+  0:00:34.707   816M / 5G    INFO    General                 (pair_info_count.cpp       : 208)   Edge pairs: 7222
+  0:00:34.709   816M / 5G    INFO    General                 (pair_info_count.cpp       : 212)   114 paired reads (0.256583% of all) aligned to long edges
+  0:00:34.775   125M / 5G    INFO    General                 (pair_info_count.cpp       : 356)     Insert size = 198.614, deviation = 81.9841, left quantile = 92, right quantile = 310, read length = 151
+  0:00:34.777   125M / 5G    INFO    General                 (pair_info_count.cpp       : 373)   Filtering data for library #0
+  0:00:34.781   125M / 5G    INFO    General                 (pair_info_count.cpp       :  39)   Selecting usual mapper
+  0:00:34.825   125M / 5G    INFO    General                 (sequence_mapper_notifier.h:  94)   Total 44430 reads processed
+  0:00:34.826   125M / 5G    INFO    General                 (pair_info_count.cpp       : 385)   Mapping library #0
+  0:00:34.828   125M / 5G    INFO    General                 (pair_info_count.cpp       : 387)   Mapping paired reads (takes a while)
+  0:00:34.829   125M / 5G    INFO    General                 (pair_info_count.cpp       : 288)   Left insert size quantile 92, right insert size quantile 310, filtering threshold 1, rounding threshold 0
+  0:00:34.840   134M / 5G    INFO    General                 (pair_info_count.cpp       :  39)   Selecting usual mapper
+  0:00:34.881   134M / 5G    INFO    General                 (sequence_mapper_notifier.h:  94)   Total 44430 reads processed
+  0:00:34.889   134M / 5G    INFO    General                 (pair_info_count.cpp       : 329)   Mapping contigs library #1
+  0:00:34.890   134M / 5G    INFO    General                 (pair_info_count.cpp       :  39)   Selecting usual mapper
+  0:00:34.962   135M / 5G    INFO    General                 (sequence_mapper_notifier.h:  94)   Total 5693 reads processed
+  0:00:34.963   135M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Distance Estimation
+  0:00:34.963   135M / 5G    INFO    General                 (distance_estimation.cpp   : 174)   Processing library #0
+  0:00:34.964   135M / 5G    INFO    General                 (distance_estimation.cpp   : 150)   Weight Filter Done
+  0:00:34.965   135M / 5G    INFO   DistanceEstimator        (distance_estimation.hpp   : 116)   Using SIMPLE distance estimator
+  0:00:34.973   135M / 5G    INFO    General                 (distance_estimation.cpp   :  35)   Filtering info
+  0:00:34.974   135M / 5G    INFO    General                 (pair_info_filters.hpp     : 242)   Start filtering; index size: 10256
+  0:00:34.980   135M / 5G    INFO    General                 (pair_info_filters.hpp     : 263)   Done filtering
+  0:00:34.981   135M / 5G    INFO    General                 (distance_estimation.cpp   : 157)   Refining clustered pair information
+  0:00:34.983   135M / 5G    INFO    General                 (distance_estimation.cpp   : 159)   The refining of clustered pair information has been finished
+  0:00:34.983   135M / 5G    INFO    General                 (distance_estimation.cpp   : 161)   Improving paired information
+  0:00:34.992   135M / 5G    INFO   PairInfoImprover         (pair_info_improver.hpp    : 103)   Paired info stats: missing = 0; contradictional = 0
+  0:00:35.000   135M / 5G    INFO   PairInfoImprover         (pair_info_improver.hpp    : 103)   Paired info stats: missing = 0; contradictional = 0
+  0:00:35.001   135M / 5G    INFO    General                 (distance_estimation.cpp   : 104)   Filling scaffolding index
+  0:00:35.002   135M / 5G    INFO   DistanceEstimator        (distance_estimation.hpp   : 116)   Using SMOOTHING distance estimator
+  0:00:35.004   135M / 5G    INFO    General                 (distance_estimation.cpp   :  35)   Filtering info
+  0:00:35.005   135M / 5G    INFO    General                 (pair_info_filters.hpp     : 242)   Start filtering; index size: 10030
+  0:00:35.009   135M / 5G    INFO    General                 (pair_info_filters.hpp     : 263)   Done filtering
+  0:00:35.010   135M / 5G    INFO    General                 (distance_estimation.cpp   : 183)   Clearing raw paired index
+  0:00:35.012   135M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Repeat Resolving
+  0:00:35.013   135M / 5G    INFO    General                 (repeat_resolving.cpp      :  69)   Using Path-Extend repeat resolving
+  0:00:35.013   135M / 5G    INFO    General                 (launcher.cpp              : 538)   ExSPAnder repeat resolving tool started
+  0:00:35.035   154M / 5G    INFO    General                 (launcher.cpp              : 404)   Creating main extenders, unique edge length = 2000
+  0:00:35.037   154M / 5G    INFO    General                 (launcher.cpp              : 336)   filling path container
+  0:00:35.042   154M / 5G    INFO    General                 (extenders_logic.cpp       :  35)   resolvable_repeat_length_bound set to 10000
+  0:00:35.047   154M / 5G    INFO    General                 (extenders_logic.cpp       : 519)   Using 1 paired-end library
+  0:00:35.047   154M / 5G    INFO    General                 (extenders_logic.cpp       : 520)   Using 1 paired-end scaffolding library
+  0:00:35.048   154M / 5G    INFO    General                 (extenders_logic.cpp       : 521)   Using 1 single read library
+  0:00:35.049   154M / 5G    INFO    General                 (launcher.cpp              : 371)   Filling backbone edges for long reads scaffolding...
+  0:00:35.050   154M / 5G    INFO    General                 (launcher.cpp              : 373)    with long reads paths
+  0:00:35.051   154M / 5G    INFO    General                 (launcher.cpp              : 382)   Removing fake unique with paired-end libs
+  0:00:35.052   154M / 5G    INFO    General                 (launcher.cpp              : 393)   0 unique edges
+  0:00:35.052   154M / 5G    INFO    General                 (extenders_logic.cpp       : 422)   Using 0 long reads scaffolding libraries
+  0:00:35.053   154M / 5G    INFO    General                 (extenders_logic.cpp       : 432)   Using additional coordinated coverage extender
+  0:00:35.054   154M / 5G    INFO    General                 (launcher.cpp              : 432)   Total number of extenders is 5
+  0:00:35.055   154M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 0 paths from 4997 (0%)
+  0:00:35.063   155M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 128 paths from 4997 (2%)
+  0:00:35.070   156M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 256 paths from 4997 (5%)
+  0:00:35.082   158M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 500 paths from 4997 (10%)
+  0:00:35.084   158M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 512 paths from 4997 (10%)
+  0:00:35.107   162M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 1000 paths from 4997 (20%)
+  0:00:35.109   162M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 1024 paths from 4997 (20%)
+  0:00:35.131   166M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 1500 paths from 4997 (30%)
+  0:00:35.154   170M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 2000 paths from 4997 (40%)
+  0:00:35.157   171M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 2048 paths from 4997 (40%)
+  0:00:35.178   174M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 2500 paths from 4997 (50%)
+  0:00:35.201   178M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 3000 paths from 4997 (60%)
+  0:00:35.224   182M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 3500 paths from 4997 (70%)
+  0:00:35.247   186M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 4000 paths from 4997 (80%)
+  0:00:35.252   187M / 5G    INFO    General                 (path_extender.hpp         : 892)   Processed 4096 paths from 4997 (81%)
+  0:00:35.271   190M / 5G    INFO    General                 (path_extender.hpp         : 894)   Processed 4500 paths from 4997 (90%)
+  0:00:35.298   194M / 5G    INFO    General                 (launcher.cpp              : 244)   Finalizing paths
+  0:00:35.299   194M / 5G    INFO    General                 (launcher.cpp              : 246)   Deduplicating paths
+  0:00:35.308   194M / 5G    INFO    General                 (launcher.cpp              : 250)   Paths deduplicated
+  0:00:35.308   194M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 295)   Removing overlaps
+  0:00:35.309   194M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 305)   Marking overlaps
+  0:00:35.310   194M / 5G    INFO   OverlapRemover           (pe_resolver.hpp           : 130)   Marking start/end overlaps
+  0:00:35.314   194M / 5G    INFO   OverlapRemover           (pe_resolver.hpp           : 133)   Marking remaining overlaps
+  0:00:35.319   194M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 308)   Splitting paths
+  0:00:35.320   194M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 313)   Deduplicating paths
+  0:00:35.322   194M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 315)   Overlaps removed
+  0:00:35.327   194M / 5G    INFO    General                 (launcher.cpp              : 267)   Paths finalized
+  0:00:35.328   194M / 5G    INFO    General                 (launcher.cpp              : 439)   Closing gaps in paths
+  0:00:35.345   195M / 5G    INFO    General                 (launcher.cpp              : 467)   Gap closing completed
+  0:00:35.350   196M / 5G    INFO    General                 (launcher.cpp              : 296)   Traversing tandem repeats
+  0:00:35.369   196M / 5G    INFO    General                 (launcher.cpp              : 306)   Traversed 0 loops
+  0:00:35.370   196M / 5G    INFO    General                 (launcher.cpp              : 244)   Finalizing paths
+  0:00:35.371   196M / 5G    INFO    General                 (launcher.cpp              : 246)   Deduplicating paths
+  0:00:35.373   196M / 5G    INFO    General                 (launcher.cpp              : 250)   Paths deduplicated
+  0:00:35.374   196M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 295)   Removing overlaps
+  0:00:35.374   196M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 305)   Marking overlaps
+  0:00:35.375   196M / 5G    INFO   OverlapRemover           (pe_resolver.hpp           : 130)   Marking start/end overlaps
+  0:00:35.379   196M / 5G    INFO   OverlapRemover           (pe_resolver.hpp           : 133)   Marking remaining overlaps
+  0:00:35.383   196M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 308)   Splitting paths
+  0:00:35.384   196M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 313)   Deduplicating paths
+  0:00:35.386   196M / 5G    INFO   PEResolver               (pe_resolver.hpp           : 315)   Overlaps removed
+  0:00:35.389   196M / 5G    INFO    General                 (launcher.cpp              : 267)   Paths finalized
+  0:00:35.390   196M / 5G    INFO    General                 (launcher.cpp              : 596)   ExSPAnder repeat resolving tool finished
+  0:00:35.402   196M / 5G    INFO   StageManager             (stage.cpp                 : 166)   STAGE == Contig Output
+  0:00:35.403   196M / 5G    INFO    General                 (contig_output.hpp         :  21)   Outputting contigs to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/before_rr.fasta
+  0:00:35.441   196M / 5G    INFO    General                 (contig_output_stage.cpp   : 146)   Writing GFA graph to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/assembly_graph_with_scaffolds.gfa
+  0:00:35.462   196M / 5G    INFO    General                 (contig_output_stage.cpp   : 160)   Outputting FastG graph to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/assembly_graph.fastg
+  0:00:35.525   196M / 5G    INFO    General                 (contig_output_stage.cpp   : 190)   Breaking scaffolds
+  0:00:35.561   196M / 5G    INFO    General                 (contig_output_stage.cpp   :  95)   Outputting contigs to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/final_contigs.fasta
+  0:00:35.577   196M / 5G    INFO    General                 (contig_output_stage.cpp   : 101)   Outputting FastG paths to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/final_contigs.paths
+  0:00:35.608   196M / 5G    INFO    General                 (contig_output_stage.cpp   :  95)   Outputting contigs to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/scaffolds.fasta
+  0:00:35.624   196M / 5G    INFO    General                 (contig_output_stage.cpp   : 101)   Outputting FastG paths to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/scaffolds.paths
+  0:00:35.632   196M / 5G    INFO    General                 (contig_output_stage.cpp   : 108)   Populating GFA with scaffold paths
+  0:00:35.637   196M / 5G    INFO    General                 (pipeline.cpp              : 259)   SPAdes finished
+  0:00:35.661   173M / 5G    INFO    General                 (main.cpp                  : 107)   Assembling time: 0 hours 0 minutes 35 seconds
+
+===== K55 finished. 
+
+
+===== Copy files started. 
+
+
+== Running: /home/jsj3921/.conda/envs/mamba/bin/python /hpc/software/spades/3.14.1/share/spades/spades_pipeline/scripts/copy_files.py /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/before_rr.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/before_rr.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/assembly_graph_after_simplification.gfa /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/assembly_graph_after_simplification.gfa /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/final_contigs.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/contigs.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/first_pe_contigs.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/first_pe_contigs.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/strain_graph.gfa /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/strain_graph.gfa /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/scaffolds.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/scaffolds.fasta /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/scaffolds.paths /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/scaffolds.paths /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/assembly_graph_with_scaffolds.gfa /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/assembly_graph_with_scaffolds.gfa /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/assembly_graph.fastg /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/assembly_graph.fastg /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/K55/final_contigs.paths /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/contigs.paths
+
+
+===== Copy files finished. 
+
+
+===== Assembling finished. 
+
+
+===== Breaking scaffolds started. 
+
+
+== Running: /home/jsj3921/.conda/envs/mamba/bin/python /hpc/software/spades/3.14.1/share/spades/spades_pipeline/scripts/breaking_scaffolds_script.py --result_scaffolds_filename /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/scaffolds.fasta --misc_dir /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/misc --threshold_for_breaking_scaffolds 3
+
+
+===== Breaking scaffolds finished. 
+
+
+===== Terminate started. 
+
+
+===== Terminate finished. 
+
+ * Corrected reads are in /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/corrected/
+ * Assembled contigs are in /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/contigs.fasta
+ * Assembled scaffolds are in /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/scaffolds.fasta
+ * Paths in the assembly graph corresponding to the contigs are in /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/contigs.paths
+ * Paths in the assembly graph corresponding to the scaffolds are in /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/scaffolds.paths
+ * Assembly graph is in /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/assembly_graph.fastg
+ * Assembly graph in GFA format is in /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/assembly_graph_with_scaffolds.gfa
+
+======= SPAdes pipeline finished.
+
+SPAdes log can be found here: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/spades_out/DNA_B01_01/spades.log
+
+Thank you for using SPAdes!
+[Mon May  9 22:01:28 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Pipeline set to use the following assmbler(s): ['megahit', 'spades']
+                sample  ...                              reverse_read
+sample                  ...                                          
+DNA_B02_15  DNA_B02_15  ...  data/DNA_B02_15_S41_L002_R2_001.fastq.gz
+DNA_B01_21  DNA_B01_21  ...  data/DNA_B01_21_S19_L001_R2_001.fastq.gz
+DNA_B01_27  DNA_B01_27  ...  data/DNA_B01_27_S25_L001_R2_001.fastq.gz
+DNA_B03_19  DNA_B03_19  ...  data/DNA_B03_19_S18_L001_R2_001.fastq.gz
+DNA_B01_04  DNA_B01_04  ...   data/DNA_B01_04_S4_L001_R2_001.fastq.gz
+DNA_B02_23  DNA_B02_23  ...  data/DNA_B02_23_S47_L002_R2_001.fastq.gz
+DNA_B02_02  DNA_B02_02  ...  data/DNA_B02_02_S31_L002_R2_001.fastq.gz
+DNA_B01_02  DNA_B01_02  ...   data/DNA_B01_02_S2_L001_R2_001.fastq.gz
+DNA_B01_03  DNA_B01_03  ...   data/DNA_B01_03_S3_L001_R2_001.fastq.gz
+DNA_B01_01  DNA_B01_01  ...   data/DNA_B01_01_S1_L001_R2_001.fastq.gz
+DNA_B02_24  DNA_B02_24  ...  data/DNA_B02_24_S48_L002_R2_001.fastq.gz
+DNA_B03_15  DNA_B03_15  ...  data/DNA_B03_15_S14_L001_R2_001.fastq.gz
+
+[12 rows x 4 columns]

@@ -1,0 +1,105 @@
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Mon May  9 21:55:41 2022]
+rule quast_spades:
+    input: results/spades_out/DNA_B01_04/scaffolds.fasta
+    output: results/quast_out/spades/DNA_B01_04/report.html
+    jobid: 0
+    wildcards: sample=DNA_B01_04
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        quast.py -o results/quast_out/spades/DNA_B01_04 --threads 1 --min-contig 0 -L results/spades_out/DNA_B01_04/scaffolds.fasta
+        
+Activating conda environment: .snakemake/conda/c8c34f669db5acca67952671317e8f99
+/projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/.snakemake/conda/c8c34f669db5acca67952671317e8f99/bin/quast.py -o results/quast_out/spades/DNA_B01_04 --threads 1 --min-contig 0 -L results/spades_out/DNA_B01_04/scaffolds.fasta
+
+Version: 5.0.2
+
+System information:
+  OS: Linux-3.10.0-862.el7.x86_64-x86_64-with-redhat-7.5-Maipo (linux_64)
+  Python version: 3.7.12
+  CPUs number: 52
+
+Started: 2022-05-09 21:55:45
+
+Logging to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/quast.log
+
+CWD: /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake
+Main parameters: 
+  MODE: default, threads: 1, minimum alignment length: 65, ambiguity: one, threshold for extensive misassembly size: 1000
+
+Contigs:
+  Pre-processing...
+  results/spades_out/DNA_B01_04/scaffolds.fasta ==> DNA_B01_04
+
+2022-05-09 21:55:49
+Running Basic statistics processor...
+  Contig files: 
+    DNA_B01_04
+  Calculating N50 and L50...
+    DNA_B01_04, N50 = 301, L50 = 1881, Total length = 1710681, GC % = 40.99, # N's per 100 kbp =  2.92
+  Drawing Nx plot...
+    saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/basic_stats/Nx_plot.pdf
+  Drawing cumulative plot...
+    saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/basic_stats/cumulative_plot.pdf
+  Drawing GC content plot...
+    saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/basic_stats/GC_content_plot.pdf
+  Drawing DNA_B01_04 GC content plot...
+    saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/basic_stats/DNA_B01_04_GC_content_plot.pdf
+  Drawing Coverage histogram (bin size: 1x)...
+    saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/basic_stats/coverage_histogram.pdf
+  Drawing DNA_B01_04 coverage histogram (bin size: 1x)...
+    saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/basic_stats/DNA_B01_04_coverage_histogram.pdf
+Done.
+
+NOTICE: Genes are not predicted by default. Use --gene-finding or --glimmer option to enable it.
+
+2022-05-09 21:55:51
+Creating large visual summaries...
+This may take a while: press Ctrl-C to skip this step..
+  1 of 2: Creating Icarus viewers...
+  2 of 2: Creating PDF with all tables and plots...
+Done
+
+2022-05-09 21:55:52
+RESULTS:
+  Text versions of total report are saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/report.txt, report.tsv, and report.tex
+  Text versions of transposed total report are saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/transposed_report.txt, transposed_report.tsv, and transposed_report.tex
+  HTML version (interactive tables and plots) is saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/report.html
+  PDF version (tables and plots) is saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/report.pdf
+  Icarus (contig browser) is saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/icarus.html
+  Log is saved to /projects/b1042/HartmannLab/jack/multi-meta-omics/shotgun/metagenomics-snakemake/results/quast_out/spades/DNA_B01_04/quast.log
+
+Finished: 2022-05-09 21:55:52
+Elapsed time: 0:00:07.267137
+NOTICEs: 1; WARNINGs: 0; non-fatal ERRORs: 0
+
+Thank you for using QUAST!
+[Mon May  9 21:55:52 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Pipeline set to use the following assmbler(s): ['megahit', 'spades']
+                sample  ...                              reverse_read
+sample                  ...                                          
+DNA_B02_15  DNA_B02_15  ...  data/DNA_B02_15_S41_L002_R2_001.fastq.gz
+DNA_B01_21  DNA_B01_21  ...  data/DNA_B01_21_S19_L001_R2_001.fastq.gz
+DNA_B01_27  DNA_B01_27  ...  data/DNA_B01_27_S25_L001_R2_001.fastq.gz
+DNA_B03_19  DNA_B03_19  ...  data/DNA_B03_19_S18_L001_R2_001.fastq.gz
+DNA_B01_04  DNA_B01_04  ...   data/DNA_B01_04_S4_L001_R2_001.fastq.gz
+DNA_B02_23  DNA_B02_23  ...  data/DNA_B02_23_S47_L002_R2_001.fastq.gz
+DNA_B02_02  DNA_B02_02  ...  data/DNA_B02_02_S31_L002_R2_001.fastq.gz
+DNA_B01_02  DNA_B01_02  ...   data/DNA_B01_02_S2_L001_R2_001.fastq.gz
+DNA_B01_03  DNA_B01_03  ...   data/DNA_B01_03_S3_L001_R2_001.fastq.gz
+DNA_B01_01  DNA_B01_01  ...   data/DNA_B01_01_S1_L001_R2_001.fastq.gz
+DNA_B02_24  DNA_B02_24  ...  data/DNA_B02_24_S48_L002_R2_001.fastq.gz
+DNA_B03_15  DNA_B03_15  ...  data/DNA_B03_15_S14_L001_R2_001.fastq.gz
+
+[12 rows x 4 columns]

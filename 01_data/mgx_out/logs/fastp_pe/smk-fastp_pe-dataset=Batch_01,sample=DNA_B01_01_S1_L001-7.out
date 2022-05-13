@@ -1,0 +1,133 @@
+/home/jsj3921/.conda/envs/mamba/lib/python3.8/site-packages/pulp/apis/gurobi_api.py:357: UserWarning: GUROBI error: 
+ERROR 10009: No Gurobi license found (user jsj3921, host qnode0153, hostid efb6a025, sockets 2)
+
+.
+  warnings.warn("GUROBI error: {}.".format(out))
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Sun Apr 10 18:34:15 2022]
+rule fastp_pe:
+    input: data/Batch_01/DNA_B01_01_S1_L001_R1_001.fastq.gz, data/Batch_01/DNA_B01_01_S1_L001_R2_001.fastq.gz
+    output: results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R1.fastq.gz, results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R2.fastq.gz, results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.json, results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.html
+    jobid: 0
+    wildcards: dataset=Batch_01, sample=DNA_B01_01_S1_L001
+    threads: 16
+    resources: mem_mb=4416, disk_mb=4416, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=02:00:00
+
+fastp -i data/Batch_01/DNA_B01_01_S1_L001_R1_001.fastq.gz -I data/Batch_01/DNA_B01_01_S1_L001_R2_001.fastq.gz --out1 results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R1.fastq.gz --out2 results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.json -h results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.html -V
+Activating conda environment: .snakemake/conda/e465827c50588ca6f951e286e693b21d
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+[18:34:25] start to load data
+[18:34:36] loaded 1M read pairs
+[18:34:48] loaded 2M read pairs
+[18:34:59] loaded 3M read pairs
+[18:35:11] loaded 4M read pairs
+[18:35:22] loaded 5M read pairs
+[18:35:34] loaded 6M read pairs
+[18:35:46] loaded 7M read pairs
+[18:35:58] loaded 8M read pairs
+[18:36:9] loaded 9M read pairs
+[18:36:20] loaded 10M read pairs
+[18:36:31] loaded 11M read pairs
+[18:36:42] loaded 12M read pairs
+[18:36:53] loaded 13M read pairs
+[18:37:5] loaded 14M read pairs
+[18:37:16] loaded 15M read pairs
+[18:37:27] loaded 16M read pairs
+[18:37:34] all reads loaded, start to monitor thread status
+[18:37:34] thread 11 is processing the 16608 / 16609 pack
+[18:37:34] thread 6 is processing the 16608 / 16609 pack
+[18:37:34] thread 6 data processing completed
+[18:37:34] thread 6 finished
+[18:37:34] thread 8 data processing completed
+[18:37:34] thread 8 finished
+[18:37:34] thread 13 data processing completed
+[18:37:34] thread 13 finished
+[18:37:34] thread 10 data processing completed
+[18:37:34] thread 10 finished
+[18:37:34] thread 12 data processing completed
+[18:37:34] thread 12 finished
+[18:37:34] thread 2 data processing completed
+[18:37:34] thread 2 finished
+[18:37:34] thread 16 data processing completed
+[18:37:34] thread 16 finished
+[18:37:34] thread 5 data processing completed
+[18:37:34] thread 5 finished
+[18:37:34] thread 3 data processing completed
+[18:37:34] thread 3 finished
+[18:37:34] thread 4 data processing completed
+[18:37:34] thread 4 finished
+[18:37:34] thread 11 data processing completed
+[18:37:34] thread 11 finished
+[18:37:34] thread 9 data processing completed
+[18:37:34] thread 9 finished
+[18:37:34] thread 1 data processing completed
+[18:37:34] thread 1 finished
+[18:37:34] thread 15 data processing completed
+[18:37:34] thread 15 finished
+[18:37:34] thread 14 data processing completed
+[18:37:34] thread 14 finished
+[18:37:34] thread 7 data processing completed
+[18:37:34] thread 7 finished
+[18:37:34] results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R1.fastq.gz writer finished
+[18:37:34] results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R2.fastq.gz writer finished
+[18:37:34] start to generate reports
+
+Read1 before filtering:
+total reads: 16608325
+total bases: 2507857075
+Q20 bases: 2460167233(98.0984%)
+Q30 bases: 2382399949(94.9974%)
+
+Read2 before filtering:
+total reads: 16608325
+total bases: 2507857075
+Q20 bases: 2413485065(96.2369%)
+Q30 bases: 2275210201(90.7233%)
+
+Read1 after filtering:
+total reads: 16394964
+total bases: 1895992510
+Q20 bases: 1872905134(98.7823%)
+Q30 bases: 1821468651(96.0694%)
+
+Read2 aftering filtering:
+total reads: 16394964
+total bases: 1896415289
+Q20 bases: 1860150529(98.0877%)
+Q30 bases: 1782677690(94.0025%)
+
+Filtering result:
+reads passed filter: 32789928
+reads failed due to low quality: 258716
+reads failed due to too many N: 2568
+reads failed due to too short: 165438
+reads with adapter trimmed: 24420588
+bases trimmed due to adapters: 1138821094
+
+Duplication rate: 16.7373%
+
+Insert size peak (evaluated by paired-end reads): 92
+
+JSON report: results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.json
+HTML report: results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.html
+
+fastp -i data/Batch_01/DNA_B01_01_S1_L001_R1_001.fastq.gz -I data/Batch_01/DNA_B01_01_S1_L001_R2_001.fastq.gz --out1 results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R1.fastq.gz --out2 results/Batch_01/filtered/DNA_B01_01_S1_L001.filtered.R2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.json -h results/Batch_01/filtered/DNA_B01_01_S1_L001_fastp.html -V 
+fastp v0.20.1, time used: 201 seconds
+[Sun Apr 10 18:37:37 2022]
+Finished job 0.
+1 of 1 steps (100%) done

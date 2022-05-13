@@ -1,0 +1,146 @@
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Select jobs to execute...
+
+[Mon May  9 21:22:34 2022]
+rule fastp_pe:
+    input: data/DNA_B01_01_S1_L001_R1_001.fastq.gz, data/DNA_B01_01_S1_L001_R2_001.fastq.gz
+    output: results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r1.fastq.gz, results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r2.fastq.gz, results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.json, results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.html
+    jobid: 0
+    wildcards: sample=DNA_B01_01
+    threads: 16
+    resources: mem_mb=4416, disk_mb=4416, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        fastp -i data/DNA_B01_01_S1_L001_R1_001.fastq.gz -I data/DNA_B01_01_S1_L001_R2_001.fastq.gz --out1 results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r1.fastq.gz --out2 results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.json -h results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.html -V
+        
+Activating conda environment: .snakemake/conda/e465827c50588ca6f951e286e693b21d
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Detecting adapter sequence for read2...
+>Illumina TruSeq Adapter Read 2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+
+[21:22:44] start to load data
+[21:22:58] loaded 1M read pairs
+[21:23:12] loaded 2M read pairs
+[21:23:26] loaded 3M read pairs
+[21:23:40] loaded 4M read pairs
+[21:23:54] loaded 5M read pairs
+[21:24:8] loaded 6M read pairs
+[21:24:23] loaded 7M read pairs
+[21:24:37] loaded 8M read pairs
+[21:24:51] loaded 9M read pairs
+[21:25:4] loaded 10M read pairs
+[21:25:18] loaded 11M read pairs
+[21:25:31] loaded 12M read pairs
+[21:25:45] loaded 13M read pairs
+[21:25:57] loaded 14M read pairs
+[21:26:10] loaded 15M read pairs
+[21:26:23] loaded 16M read pairs
+[21:26:30] all reads loaded, start to monitor thread status
+[21:26:30] thread 1 is processing the 16608 / 16609 pack
+[21:26:30] thread 5 data processing completed
+[21:26:30] thread 5 finished
+[21:26:30] thread 14 data processing completed
+[21:26:30] thread 14 finished
+[21:26:30] thread 8 data processing completed
+[21:26:30] thread 8 finished
+[21:26:30] thread 11 data processing completed
+[21:26:30] thread 11 finished
+[21:26:30] thread 6 data processing completed
+[21:26:30] thread 6 finished
+[21:26:30] thread 9 data processing completed
+[21:26:30] thread 9 finished
+[21:26:30] thread 16 data processing completed
+[21:26:30] thread 16 finished
+[21:26:30] thread 3 data processing completed
+[21:26:30] thread 3 finished
+[21:26:30] thread 12 data processing completed
+[21:26:30] thread 12 finished
+[21:26:30] thread 2 data processing completed
+[21:26:30] thread 2 finished
+[21:26:30] thread 4 data processing completed
+[21:26:30] thread 4 finished
+[21:26:30] thread 1 data processing completed
+[21:26:30] thread 1 finished
+[21:26:30] thread 7 data processing completed
+[21:26:30] thread 7 finished
+[21:26:30] thread 15 data processing completed
+[21:26:30] thread 15 finished
+[21:26:30] thread 13 data processing completed
+[21:26:30] thread 13 finished
+[21:26:30] thread 10 data processing completed
+[21:26:30] thread 10 finished
+[21:26:30] results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r1.fastq.gz writer finished
+[21:26:30] results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r2.fastq.gz writer finished
+[21:26:30] start to generate reports
+
+Read1 before filtering:
+total reads: 16608325
+total bases: 2507857075
+Q20 bases: 2460167233(98.0984%)
+Q30 bases: 2382399949(94.9974%)
+
+Read2 before filtering:
+total reads: 16608325
+total bases: 2507857075
+Q20 bases: 2413485065(96.2369%)
+Q30 bases: 2275210201(90.7233%)
+
+Read1 after filtering:
+total reads: 16394964
+total bases: 1895992510
+Q20 bases: 1872905134(98.7823%)
+Q30 bases: 1821468651(96.0694%)
+
+Read2 aftering filtering:
+total reads: 16394964
+total bases: 1896415289
+Q20 bases: 1860150529(98.0877%)
+Q30 bases: 1782677690(94.0025%)
+
+Filtering result:
+reads passed filter: 32789928
+reads failed due to low quality: 258716
+reads failed due to too many N: 2568
+reads failed due to too short: 165438
+reads with adapter trimmed: 24420588
+bases trimmed due to adapters: 1138821094
+
+Duplication rate: 16.7374%
+
+Insert size peak (evaluated by paired-end reads): 98
+
+JSON report: results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.json
+HTML report: results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.html
+
+fastp -i data/DNA_B01_01_S1_L001_R1_001.fastq.gz -I data/DNA_B01_01_S1_L001_R2_001.fastq.gz --out1 results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r1.fastq.gz --out2 results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.json -h results/fastp_out/DNA_B01_01/DNA_B01_01_fastp.html -V 
+fastp v0.20.1, time used: 238 seconds
+[Mon May  9 21:26:34 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Pipeline set to use the following assmbler(s): ['megahit', 'spades']
+                sample  ...                              reverse_read
+sample                  ...                                          
+DNA_B02_15  DNA_B02_15  ...  data/DNA_B02_15_S41_L002_R2_001.fastq.gz
+DNA_B01_21  DNA_B01_21  ...  data/DNA_B01_21_S19_L001_R2_001.fastq.gz
+DNA_B01_27  DNA_B01_27  ...  data/DNA_B01_27_S25_L001_R2_001.fastq.gz
+DNA_B03_19  DNA_B03_19  ...  data/DNA_B03_19_S18_L001_R2_001.fastq.gz
+DNA_B01_04  DNA_B01_04  ...   data/DNA_B01_04_S4_L001_R2_001.fastq.gz
+DNA_B02_23  DNA_B02_23  ...  data/DNA_B02_23_S47_L002_R2_001.fastq.gz
+DNA_B02_02  DNA_B02_02  ...  data/DNA_B02_02_S31_L002_R2_001.fastq.gz
+DNA_B01_02  DNA_B01_02  ...   data/DNA_B01_02_S2_L001_R2_001.fastq.gz
+DNA_B01_03  DNA_B01_03  ...   data/DNA_B01_03_S3_L001_R2_001.fastq.gz
+DNA_B01_01  DNA_B01_01  ...   data/DNA_B01_01_S1_L001_R2_001.fastq.gz
+DNA_B02_24  DNA_B02_24  ...  data/DNA_B02_24_S48_L002_R2_001.fastq.gz
+DNA_B03_15  DNA_B03_15  ...  data/DNA_B03_15_S14_L001_R2_001.fastq.gz
+
+[12 rows x 4 columns]

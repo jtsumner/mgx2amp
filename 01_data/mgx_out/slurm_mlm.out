@@ -1,0 +1,311 @@
+
+
+##########################################################################################################
+##  ,---.    ,---.  ___    _   .---. ,---------. .-./`)                                                 ##
+##  |    \  /    |.'   |  | |  | ,_| \          \\ .-.')                                                ##
+##  |  ,  \/  ,  ||   .'  | |,-./  )  `--.  ,---'/ `-' \                                                ##
+##  |  |\_   /|  |.'  '_  | |\  '_ '`)   |   \    `-'`"` _ _    _ _                                     ##
+##  |  _( )_/ |  |'   ( \.-.| > (_)  )   :_ _:    .---. ( ' )--( ' )                                    ##
+##  | (_ o _) |  |' (`. _` /|(  .  .-'   (_I_)    |   |(_{;}_)(_{;}_)                                   ##
+##  |  (_,_)  |  || (_ (_) _) `-'`-'|___(_(=)_)   |   | (_,_)--(_,_)                                    ##
+##  |  |      |  | \ /  . \ /  |        \(_I_)    |   |                                                 ##
+##  '-.---.   '--'.-''-.`-,---.`-,---.--`.-''-.   '.---.                                                ##
+##    | ,_|     .'_ _   \ |   /  |   | .'_ _   \   | ,_|                                                ##
+##  ,-./  )    / ( ` )   '|  |   |  .'/ ( ` )   ',-./  )                                                ##
+##  \  '_ '`) . (_ o _)  ||  | _ |  |. (_ o _)  |\  '_ '`)                                              ##
+##   > (_)  ) |  (_,_)___||  _( )_  ||  (_,_)___| > (_)  )                                              ##
+##  (  .  .-' '  \   .---.\ (_ o._) /'  \   .---.(  .  .-'                                              ##
+##   `-'`-'|___\  `-'    / \ (_,_) /  \  `-'    / `-'`-'|___                                            ##
+##    |        \\       /   \     /    \       /   |        \                                           ##
+##  ,---.----,---.'-...-''-. ,---------.`'-.____   `--------`                                           ##
+##  |    \  /    |  .'_ _   \\          \ .'  __ `.                                                     ##
+##  |  ,  \/  ,  | / ( ` )   '`--.  ,---'/   '  \  \                                                    ##
+##  |  |\_   /|  |. (_ o _)  |   |   \   |___|  /  |  _ _    _ _                                        ##
+##  |  _( )_/ |  ||  (_,_)___|   :_ _:      _.-`   | ( ' )--( ' )                                       ##
+##  | (_ o _) |  |'  \   .---.   (_I_)   .'   _    |(_{;}_)(_{;}_)                                      ##
+##  |  (_,_)  |  | \  `-'    /  (_(=)_)  |  _( )_  | (_,_)--(_,_)                                       ##
+##  |  |      |  |  \       /    (_I_)   \ (_ o _) /                                                    ##
+##  '-.-_'''-.'--'   .-''-.' ,---.---.--. '.(,-----.    ,---.    ,---..-./`)     _______      .-'''-.   ##
+##   '_( )_   \    .'_ _   \ |    \  |  |  .'  .-,  '.  |    \  /    |\ .-.')   /   __  \    / _     \  ##
+##  |(_ o _)|  '  / ( ` )   '|  ,  \ |  | / ,-.|  \ _ \ |  ,  \/  ,  |/ `-' \  | ,_/  \__)  (`' )/`--'  ##
+##  . (_,_)/___| . (_ o _)  ||  |\_ \|  |;  \  '_ /  | :|  |\_   /|  | `-'`"`,-./  )       (_ o _).     ##
+##  |  |  .-----.|  (_,_)___||  _( )_\  ||  _`,/ \ _/  ||  _( )_/ |  | .---. \  '_ '`)      (_,_). '.   ##
+##  '  \  '-   .''  \   .---.| (_ o _)  |: (  '\_/ \   ;| (_ o _) |  | |   |  > (_)  )  __ .---.  \  :  ##
+##   \  `-'`   |  \  `-'    /|  (_,_)\  | \ `"/  \  ) / |  (_,_)  |  | |   | (  .  .-'_/  )\    `-'  |  ##
+##    \        /   \       / |  |    |  |  '. \_/``".'  |  |      |  | |   |  `-'`-'     /  \       /   ##
+##     `'-...-'     `'-..-'  '--'    '--'    '-----'    '--'      '--' '---'    `._____.'    `-...-'    ##
+##                                                                                                      ##
+##########################################################################################################
+
+
+NEW SNAKEMAKE EXECUTION :)
+Job Details
+Job ID: 6560755
+Start Time: Tue May 10 13:02:51 CDT 2022
+
+Loading conda...
+
+Starting snakemake on cluster...
+The flag 'directory' used in rule SS_checkm_analysis is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+The flag 'directory' used in rule SS_checkm_plots is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 60
+Job stats:
+job                            count    min threads    max threads
+---------------------------  -------  -------------  -------------
+all                                1              1              1
+bwa_map                            2             20             20
+fastp_pe                           2             16             16
+hclust                             1              1              1
+hclust_genus                       1              1              1
+metaphlan                          2             20             20
+metaphlan_genus_abundance          1              1              1
+metaphlan_merge                    1              1              1
+metaphlan_species_abundance        1              1              1
+total                             12              1             20
+
+Select jobs to execute...
+
+[Tue May 10 13:02:57 2022]
+rule fastp_pe:
+    input: data/DNA_B04_41_R1.fastq.gz, data/DNA_B04_41_R2.fastq.gz
+    output: results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r1.fastq.gz, results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r2.fastq.gz, results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1_fastp.json, results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1_fastp.html
+    jobid: 8
+    wildcards: sample=DNA_B04_41_R1
+    threads: 16
+    resources: mem_mb=1817, disk_mb=1817, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        fastp -i data/DNA_B04_41_R1.fastq.gz -I data/DNA_B04_41_R2.fastq.gz --out1 results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r1.fastq.gz --out2 results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1_fastp.json -h results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1_fastp.html -V
+        
+Submitted job 8 with external jobid 'Submitted batch job 6560772'.
+
+[Tue May 10 13:03:02 2022]
+rule fastp_pe:
+    input: data/DNA_B04_32_R1.fastq.gz, data/DNA_B04_32_R2.fastq.gz
+    output: results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r1.fastq.gz, results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r2.fastq.gz, results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1_fastp.json, results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1_fastp.html
+    jobid: 10
+    wildcards: sample=DNA_B04_32_R1
+    threads: 16
+    resources: mem_mb=2136, disk_mb=2136, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        fastp -i data/DNA_B04_32_R1.fastq.gz -I data/DNA_B04_32_R2.fastq.gz --out1 results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r1.fastq.gz --out2 results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r2.fastq.gz --detect_adapter_for_pe --thread 16 --length_required 50 -j results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1_fastp.json -h results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1_fastp.html -V
+        
+Submitted job 10 with external jobid 'Submitted batch job 6560773'.
+[Tue May 10 13:05:44 2022]
+Finished job 10.
+1 of 12 steps (8%) done
+Select jobs to execute...
+
+[Tue May 10 13:05:44 2022]
+rule bwa_map:
+    input: results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r1.fastq.gz, results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r2.fastq.gz, resources/genome/hg38.fa.gz.ann, resources/genome/hg38.fa.gz
+    output: results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r1.fastq, results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r2.fastq
+    jobid: 26
+    wildcards: sample=DNA_B04_32_R1
+    threads: 20
+    resources: mem_mb=3503, disk_mb=3503, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=15G, time=08:00:00
+
+
+        module purge all
+        module load bwa/0.7.17
+        module load samtools/1.10.1
+        module load bedtools/2.29.2
+        bwa mem -t 20 resources/genome/hg38.fa.gz results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r1.fastq.gz results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r2.fastq.gz > results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.mapped.sam
+        samtools view -Subh -o results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.mapped.bam results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.mapped.sam
+        samtools sort -o results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.mapped.sorted.bam results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.mapped.bam
+
+        samtools view -b -f 12 -F 256 -o results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.unmapped.bam results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.mapped.sorted.bam
+        bedtools bamtofastq -i results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.unmapped.bam -fq results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r1.fastq -fq2 results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r2.fastq
+        
+Submitted job 26 with external jobid 'Submitted batch job 6560817'.
+[Tue May 10 13:05:55 2022]
+Finished job 8.
+2 of 12 steps (17%) done
+Select jobs to execute...
+
+[Tue May 10 13:05:55 2022]
+rule bwa_map:
+    input: results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r1.fastq.gz, results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r2.fastq.gz, resources/genome/hg38.fa.gz.ann, resources/genome/hg38.fa.gz
+    output: results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r1.fastq, results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r2.fastq
+    jobid: 24
+    wildcards: sample=DNA_B04_41_R1
+    threads: 20
+    resources: mem_mb=3298, disk_mb=3298, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=15G, time=08:00:00
+
+
+        module purge all
+        module load bwa/0.7.17
+        module load samtools/1.10.1
+        module load bedtools/2.29.2
+        bwa mem -t 20 resources/genome/hg38.fa.gz results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r1.fastq.gz results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r2.fastq.gz > results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.mapped.sam
+        samtools view -Subh -o results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.mapped.bam results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.mapped.sam
+        samtools sort -o results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.mapped.sorted.bam results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.mapped.bam
+
+        samtools view -b -f 12 -F 256 -o results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.unmapped.bam results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.mapped.sorted.bam
+        bedtools bamtofastq -i results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.unmapped.bam -fq results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r1.fastq -fq2 results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r2.fastq
+        
+Submitted job 24 with external jobid 'Submitted batch job 6560827'.
+[Tue May 10 13:14:19 2022]
+Finished job 24.
+3 of 12 steps (25%) done
+Select jobs to execute...
+
+[Tue May 10 13:14:19 2022]
+rule metaphlan:
+    input: resources/metaphlan_db, results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r1.fastq, results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r2.fastq
+    output: results/metaphlan_out/DNA_B04_41_R1/DNA_B04_41_R1.metaphlan_profile.txt, results/metaphlan_out/DNA_B04_41_R1/DNA_B04_41_R1.bowtie2.bz2
+    jobid: 42
+    wildcards: sample=DNA_B04_41_R1
+    threads: 20
+    resources: mem_mb=1464, disk_mb=1464, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=10g, time=04:00:00
+
+
+        metaphlan results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r1.fastq,results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r2.fastq         --bowtie2out results/metaphlan_out/DNA_B04_41_R1/DNA_B04_41_R1.bowtie2.bz2         --index mpa_v30_CHOCOPhlAn_201901         --bowtie2db resources/metaphlan_db         --nproc 20         --input_type fastq         --unknown_estimation         -o results/metaphlan_out/DNA_B04_41_R1/DNA_B04_41_R1.metaphlan_profile.txt
+        
+Submitted job 42 with external jobid 'Submitted batch job 6560961'.
+[Tue May 10 13:16:19 2022]
+Finished job 42.
+4 of 12 steps (33%) done
+[Tue May 10 13:16:54 2022]
+Finished job 26.
+5 of 12 steps (42%) done
+Select jobs to execute...
+
+[Tue May 10 13:16:54 2022]
+rule metaphlan:
+    input: resources/metaphlan_db, results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r1.fastq, results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r2.fastq
+    output: results/metaphlan_out/DNA_B04_32_R1/DNA_B04_32_R1.metaphlan_profile.txt, results/metaphlan_out/DNA_B04_32_R1/DNA_B04_32_R1.bowtie2.bz2
+    jobid: 44
+    wildcards: sample=DNA_B04_32_R1
+    threads: 20
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=10g, time=04:00:00
+
+
+        metaphlan results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r1.fastq,results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r2.fastq         --bowtie2out results/metaphlan_out/DNA_B04_32_R1/DNA_B04_32_R1.bowtie2.bz2         --index mpa_v30_CHOCOPhlAn_201901         --bowtie2db resources/metaphlan_db         --nproc 20         --input_type fastq         --unknown_estimation         -o results/metaphlan_out/DNA_B04_32_R1/DNA_B04_32_R1.metaphlan_profile.txt
+        
+Submitted job 44 with external jobid 'Submitted batch job 6560967'.
+[Tue May 10 13:19:17 2022]
+Finished job 44.
+6 of 12 steps (50%) done
+Select jobs to execute...
+
+[Tue May 10 13:19:17 2022]
+rule metaphlan_merge:
+    input: results/metaphlan_out/DNA_B02_15/DNA_B02_15.metaphlan_profile.txt, results/metaphlan_out/DNA_B01_21/DNA_B01_21.metaphlan_profile.txt, results/metaphlan_out/DNA_B01_27/DNA_B01_27.metaphlan_profile.txt, results/metaphlan_out/DNA_B03_19/DNA_B03_19.metaphlan_profile.txt, results/metaphlan_out/DNA_B01_04/DNA_B01_04.metaphlan_profile.txt, results/metaphlan_out/DNA_B02_23/DNA_B02_23.metaphlan_profile.txt, results/metaphlan_out/DNA_B02_02/DNA_B02_02.metaphlan_profile.txt, results/metaphlan_out/DNA_B04_41_R1/DNA_B04_41_R1.metaphlan_profile.txt, results/metaphlan_out/DNA_B01_02/DNA_B01_02.metaphlan_profile.txt, results/metaphlan_out/DNA_B04_32_R1/DNA_B04_32_R1.metaphlan_profile.txt, results/metaphlan_out/DNA_B01_03/DNA_B01_03.metaphlan_profile.txt, results/metaphlan_out/DNA_B01_01/DNA_B01_01.metaphlan_profile.txt, results/metaphlan_out/DNA_B02_24/DNA_B02_24.metaphlan_profile.txt, results/metaphlan_out/DNA_B03_15/DNA_B03_15.metaphlan_profile.txt
+    output: results/metaphlan_merged/merged_metaphlan_profile.tsv
+    jobid: 33
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        merge_metaphlan_tables.py results/metaphlan_out/DNA_B02_15/DNA_B02_15.metaphlan_profile.txt results/metaphlan_out/DNA_B01_21/DNA_B01_21.metaphlan_profile.txt results/metaphlan_out/DNA_B01_27/DNA_B01_27.metaphlan_profile.txt results/metaphlan_out/DNA_B03_19/DNA_B03_19.metaphlan_profile.txt results/metaphlan_out/DNA_B01_04/DNA_B01_04.metaphlan_profile.txt results/metaphlan_out/DNA_B02_23/DNA_B02_23.metaphlan_profile.txt results/metaphlan_out/DNA_B02_02/DNA_B02_02.metaphlan_profile.txt results/metaphlan_out/DNA_B04_41_R1/DNA_B04_41_R1.metaphlan_profile.txt results/metaphlan_out/DNA_B01_02/DNA_B01_02.metaphlan_profile.txt results/metaphlan_out/DNA_B04_32_R1/DNA_B04_32_R1.metaphlan_profile.txt results/metaphlan_out/DNA_B01_03/DNA_B01_03.metaphlan_profile.txt results/metaphlan_out/DNA_B01_01/DNA_B01_01.metaphlan_profile.txt results/metaphlan_out/DNA_B02_24/DNA_B02_24.metaphlan_profile.txt results/metaphlan_out/DNA_B03_15/DNA_B03_15.metaphlan_profile.txt > results/metaphlan_merged/merged_metaphlan_profile.tsv
+        
+Submitted job 33 with external jobid 'Submitted batch job 6560974'.
+[Tue May 10 13:20:34 2022]
+Finished job 33.
+7 of 12 steps (58%) done
+Select jobs to execute...
+
+[Tue May 10 13:20:34 2022]
+rule metaphlan_species_abundance:
+    input: results/metaphlan_merged/merged_metaphlan_profile.tsv
+    output: results/metaphlan_merged/merged_metaphlan_profile_species.tsv
+    jobid: 32
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        grep -E "s__|clade|UNKNOWN" results/metaphlan_merged/merged_metaphlan_profile.tsv | sed 's/^.*s__//g'         | cut -f1,3- | sed -e 's/clade_name/sample/g' > results/metaphlan_merged/merged_metaphlan_profile_species.tsv
+        
+Submitted job 32 with external jobid 'Submitted batch job 6560990'.
+
+[Tue May 10 13:20:34 2022]
+rule metaphlan_genus_abundance:
+    input: results/metaphlan_merged/merged_metaphlan_profile.tsv
+    output: results/metaphlan_merged/merged_metaphlan_profile_genus.tsv
+    jobid: 50
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        grep -E "g__|clade|UNKNOWN" results/metaphlan_merged/merged_metaphlan_profile.tsv | sed 's/^.*g__//g'         | grep -v s__ |cut -f1,3- | sed -e 's/clade_name/sample/g' > results/metaphlan_merged/merged_metaphlan_profile_genus.tsv
+        
+Submitted job 50 with external jobid 'Submitted batch job 6560991'.
+[Tue May 10 13:21:21 2022]
+Finished job 32.
+8 of 12 steps (67%) done
+Select jobs to execute...
+
+[Tue May 10 13:21:21 2022]
+rule hclust:
+    input: results/metaphlan_merged/merged_metaphlan_profile_species.tsv
+    output: results/metaphlan_merged/merged_metaphlan_hclust_species.png
+    jobid: 31
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        hclust2.py -i results/metaphlan_merged/merged_metaphlan_profile_species.tsv -o results/metaphlan_merged/merged_metaphlan_hclust_species.png --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 -l --flabel_size 10 --slabel_size 10 --max_flabel_len 100 --max_slabel_len 100 --minv 0.1 --dpi 300
+        
+Submitted job 31 with external jobid 'Submitted batch job 6560996'.
+[Tue May 10 13:21:22 2022]
+Finished job 50.
+9 of 12 steps (75%) done
+Select jobs to execute...
+
+[Tue May 10 13:21:22 2022]
+rule hclust_genus:
+    input: results/metaphlan_merged/merged_metaphlan_profile_genus.tsv
+    output: results/metaphlan_merged/merged_metaphlan_hclust_genus.png
+    jobid: 49
+    resources: mem_mb=1000, disk_mb=1000, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+
+        hclust2.py -i results/metaphlan_merged/merged_metaphlan_profile_genus.tsv -o results/metaphlan_merged/merged_metaphlan_hclust_genus.png --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 -l --flabel_size 10 --slabel_size 10 --max_flabel_len 100 --max_slabel_len 100 --minv 0.1 --dpi 300
+        
+Submitted job 49 with external jobid 'Submitted batch job 6560997'.
+[Tue May 10 13:22:45 2022]
+Finished job 31.
+10 of 12 steps (83%) done
+[Tue May 10 13:22:46 2022]
+Finished job 49.
+11 of 12 steps (92%) done
+Select jobs to execute...
+
+[Tue May 10 13:22:46 2022]
+localrule all:
+    input: results/fastp_out/DNA_B02_15/DNA_B02_15.fastp.r1.fastq.gz, results/fastp_out/DNA_B01_21/DNA_B01_21.fastp.r1.fastq.gz, results/fastp_out/DNA_B01_27/DNA_B01_27.fastp.r1.fastq.gz, results/fastp_out/DNA_B03_19/DNA_B03_19.fastp.r1.fastq.gz, results/fastp_out/DNA_B01_04/DNA_B01_04.fastp.r1.fastq.gz, results/fastp_out/DNA_B02_23/DNA_B02_23.fastp.r1.fastq.gz, results/fastp_out/DNA_B02_02/DNA_B02_02.fastp.r1.fastq.gz, results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r1.fastq.gz, results/fastp_out/DNA_B01_02/DNA_B01_02.fastp.r1.fastq.gz, results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r1.fastq.gz, results/fastp_out/DNA_B01_03/DNA_B01_03.fastp.r1.fastq.gz, results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r1.fastq.gz, results/fastp_out/DNA_B02_24/DNA_B02_24.fastp.r1.fastq.gz, results/fastp_out/DNA_B03_15/DNA_B03_15.fastp.r1.fastq.gz, results/fastp_out/DNA_B02_15/DNA_B02_15.fastp.r2.fastq.gz, results/fastp_out/DNA_B01_21/DNA_B01_21.fastp.r2.fastq.gz, results/fastp_out/DNA_B01_27/DNA_B01_27.fastp.r2.fastq.gz, results/fastp_out/DNA_B03_19/DNA_B03_19.fastp.r2.fastq.gz, results/fastp_out/DNA_B01_04/DNA_B01_04.fastp.r2.fastq.gz, results/fastp_out/DNA_B02_23/DNA_B02_23.fastp.r2.fastq.gz, results/fastp_out/DNA_B02_02/DNA_B02_02.fastp.r2.fastq.gz, results/fastp_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp.r2.fastq.gz, results/fastp_out/DNA_B01_02/DNA_B01_02.fastp.r2.fastq.gz, results/fastp_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp.r2.fastq.gz, results/fastp_out/DNA_B01_03/DNA_B01_03.fastp.r2.fastq.gz, results/fastp_out/DNA_B01_01/DNA_B01_01.fastp.r2.fastq.gz, results/fastp_out/DNA_B02_24/DNA_B02_24.fastp.r2.fastq.gz, results/fastp_out/DNA_B03_15/DNA_B03_15.fastp.r2.fastq.gz, results/bwa_out/DNA_B02_15/DNA_B02_15.fastp_bwa.r1.fastq, results/bwa_out/DNA_B01_21/DNA_B01_21.fastp_bwa.r1.fastq, results/bwa_out/DNA_B01_27/DNA_B01_27.fastp_bwa.r1.fastq, results/bwa_out/DNA_B03_19/DNA_B03_19.fastp_bwa.r1.fastq, results/bwa_out/DNA_B01_04/DNA_B01_04.fastp_bwa.r1.fastq, results/bwa_out/DNA_B02_23/DNA_B02_23.fastp_bwa.r1.fastq, results/bwa_out/DNA_B02_02/DNA_B02_02.fastp_bwa.r1.fastq, results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r1.fastq, results/bwa_out/DNA_B01_02/DNA_B01_02.fastp_bwa.r1.fastq, results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r1.fastq, results/bwa_out/DNA_B01_03/DNA_B01_03.fastp_bwa.r1.fastq, results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r1.fastq, results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r1.fastq, results/bwa_out/DNA_B03_15/DNA_B03_15.fastp_bwa.r1.fastq, results/bwa_out/DNA_B02_15/DNA_B02_15.fastp_bwa.r2.fastq, results/bwa_out/DNA_B01_21/DNA_B01_21.fastp_bwa.r2.fastq, results/bwa_out/DNA_B01_27/DNA_B01_27.fastp_bwa.r2.fastq, results/bwa_out/DNA_B03_19/DNA_B03_19.fastp_bwa.r2.fastq, results/bwa_out/DNA_B01_04/DNA_B01_04.fastp_bwa.r2.fastq, results/bwa_out/DNA_B02_23/DNA_B02_23.fastp_bwa.r2.fastq, results/bwa_out/DNA_B02_02/DNA_B02_02.fastp_bwa.r2.fastq, results/bwa_out/DNA_B04_41_R1/DNA_B04_41_R1.fastp_bwa.r2.fastq, results/bwa_out/DNA_B01_02/DNA_B01_02.fastp_bwa.r2.fastq, results/bwa_out/DNA_B04_32_R1/DNA_B04_32_R1.fastp_bwa.r2.fastq, results/bwa_out/DNA_B01_03/DNA_B01_03.fastp_bwa.r2.fastq, results/bwa_out/DNA_B01_01/DNA_B01_01.fastp_bwa.r2.fastq, results/bwa_out/DNA_B02_24/DNA_B02_24.fastp_bwa.r2.fastq, results/bwa_out/DNA_B03_15/DNA_B03_15.fastp_bwa.r2.fastq, results/metaphlan_merged/merged_metaphlan_hclust_species.png, results/metaphlan_merged/merged_metaphlan_hclust_genus.png
+    jobid: 0
+    resources: mem_mb=52863, disk_mb=52863, tmpdir=/tmp, account=b1042, partition=genomics, nodes=1, mem=5G, time=01:00:00
+
+[Tue May 10 13:22:46 2022]
+Finished job 0.
+12 of 12 steps (100%) done
+Complete log: .snakemake/log/2022-05-10T130254.045665.snakemake.log
+Pipeline set to use the following assmbler(s): ['megahit', 'spades']
+                      sample  ...                              reverse_read
+sample                        ...                                          
+DNA_B02_15        DNA_B02_15  ...  data/DNA_B02_15_S41_L002_R2_001.fastq.gz
+DNA_B01_21        DNA_B01_21  ...  data/DNA_B01_21_S19_L001_R2_001.fastq.gz
+DNA_B01_27        DNA_B01_27  ...  data/DNA_B01_27_S25_L001_R2_001.fastq.gz
+DNA_B03_19        DNA_B03_19  ...  data/DNA_B03_19_S18_L001_R2_001.fastq.gz
+DNA_B01_04        DNA_B01_04  ...   data/DNA_B01_04_S4_L001_R2_001.fastq.gz
+DNA_B02_23        DNA_B02_23  ...  data/DNA_B02_23_S47_L002_R2_001.fastq.gz
+DNA_B02_02        DNA_B02_02  ...  data/DNA_B02_02_S31_L002_R2_001.fastq.gz
+DNA_B04_41_R1  DNA_B04_41_R1  ...               data/DNA_B04_41_R2.fastq.gz
+DNA_B01_02        DNA_B01_02  ...   data/DNA_B01_02_S2_L001_R2_001.fastq.gz
+DNA_B04_32_R1  DNA_B04_32_R1  ...               data/DNA_B04_32_R2.fastq.gz
+DNA_B01_03        DNA_B01_03  ...   data/DNA_B01_03_S3_L001_R2_001.fastq.gz
+DNA_B01_01        DNA_B01_01  ...   data/DNA_B01_01_S1_L001_R2_001.fastq.gz
+DNA_B02_24        DNA_B02_24  ...  data/DNA_B02_24_S48_L002_R2_001.fastq.gz
+DNA_B03_15        DNA_B03_15  ...  data/DNA_B03_15_S14_L001_R2_001.fastq.gz
+
+[14 rows x 4 columns]
+
+ENDING SNAKEMAKE EXECUTION
+Job Details
+Job ID: 6560755
+Start Time: Tue May 10 13:22:56 CDT 2022
+
+Bye-bye :)
+
